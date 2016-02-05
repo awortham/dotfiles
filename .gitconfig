@@ -1,1 +1,26 @@
-/Users/awortham/.gitconfig
+# This is Git's per-user configuration file.
+[core]
+# Please adapt and uncomment the following lines:
+#	user = Aaron Wortham
+#	email = awortham@BCIs-MacBook-Pro-2.local
+[user]
+	name = Aaron Wortham
+	email = wortham.aaron@gmail.com
+[core]
+	excludesfile = /Users/awortham/.gitignore_global
+	editor = /usr/bin/vim
+[alias]
+	sla = log --oneline --decorate --graph --all
+	glog = log -E -i --grep
+	pretty = log --pretty=format:'%C(yellow)%h%C(reset) - %an [%C(green)%ar%C(reset)] %s'
+	co = checkout
+	unstage = reset
+	uncommit = reset --soft HEAD^
+	alias = config --get-regexp alias
+	aa = add .
+	d = diff
+	b = branch
+	last = log -1 HEAD
+	mup = !git checkout master && git pull
+[push]
+  default = upstream
