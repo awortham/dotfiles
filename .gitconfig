@@ -22,5 +22,7 @@
 	b = branch
 	last = log -1 HEAD
 	mup = !git checkout master && git pull
+  squash = rebase -i HEAD~5
+  pr = !hub pull-request
 [push]
   default = upstream

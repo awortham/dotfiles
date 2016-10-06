@@ -1,0 +1,6 @@
+--database=mysql
+--skip-turbolinks
+--skip-test-unit
+--skip-bundle
+environment "config.generators {|g| g.helper false\n g.assets false\n end}"
+-m ~/app_template.rb
