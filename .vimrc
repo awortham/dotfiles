@@ -50,11 +50,14 @@
   Plugin 'jordwalke/flatlandia'
   Plugin 'tpope/vim-surround'
   Plugin 'tpope/vim-rails'
-  Plugin 'vim-scripts/vim-auto-save'
   Plugin 'MarcWeber/vim-addon-mw-utils'    " These next three all support tab completion snipmate functionality
   Plugin 'tomtom/tlib_vim'
   Plugin 'garbas/vim-snipmate'
+  Plugin 'tpope/vim-unimpaired'            " Allows for adding new lines above and below your current line and switching lines
+  Plugin 'tpope/vim-repeat'                " Allows plugins to repeat
 
+  " forked this, made some mods and pulling from my own repo
+  Plugin 'awortham/vim-snippets'
   " end Vundle init (required)
   call vundle#end()
 
@@ -67,6 +70,7 @@
     syntax on                    " turn on syntax highilghting
 
     filetype plugin on           " enable loading plugins for filetypes
+    runtime macros/matchit.vim
     filetype indent on           " enable loading 'indent files' for filetypes
 
     set synmaxcol=400            " no syntax highlighting for lines longer than 200 cols
@@ -136,6 +140,7 @@
   "- Theme ----------------------------------------------------------------------------------------
 
     set background=dark      " dark background
+    syntax enable
     " colorscheme smyck      " smyck colorscheme
     " colorscheme solarized  " solarized colorscheme
     colorscheme flatlandia   " flatlandia colorscheme
@@ -150,6 +155,11 @@
   set autowrite                      " write the old file out when switching between files
   autocmd BufWritePre * :%s/\s\+$//e " auto strip whitespace on save
 
+  "- Snippets with multiple inputs. Jump to next input using tab
+  if !exists("g:UltiSnipsJumpForwardTrigger")
+      let g:UltiSnipsJumpForwardTrigger = "<tab>"
+  endif
+
 "= Keys ===========================================================================================
 
   let mapleader = ','                       " set <Leader>
@@ -160,12 +170,19 @@
   nnoremap <leader>h <C-w>s<C-w><C-w>
 
   " map escape key to jj -- much faster, comments above b/c of Vim's interpretation of them jumping my cursor
-  imap jj <esc>:w<cr>
+  " imap jj <esc>:w<cr>
+  imap jj <esc>
 
-  " auto save config
-  let g:auto_save = 1
-  let g:auto_save_in_insert_mode = 0
-  let g:auto_save_silent = 1
+  " use black hole register
+    noremap x "_x
+    noremap X "_X
+
+  " mapping multi cursor keys for vim-multiple-cursors
+  " let g:multi_cursor_use_default_mapping=0
+  " let g:multi_cursor_next_key='<C-n>'
+  " let g:multi_cursor_prev_key='<C-p>'
+  " let g:multi_cursor_skip_key='<C-x>'
+  " let g:multi_cursor_quit_key='<Esc>'
 
   " easier window navigation
   nmap <C-h> <C-w>h
