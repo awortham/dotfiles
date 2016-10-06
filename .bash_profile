@@ -2,7 +2,8 @@ export CLICOLOR=1 export LSCOLORS=GxFxCxDxBxegedabagaced
 export EDITOR=/usr/bin/vim
 
 alias cdb="cd ~/Documents/ballantine_communications"
-alias cdp="cd ~/Documents/personal" alias gc="git commit -m "
+alias cdp="cd ~/Documents/personal"
+alias gc="git commit -m "
 alias gca="git commit -am "
 alias gPo="git push origin "
 alias gpo="git pull origin "
@@ -15,13 +16,6 @@ alias cpd="cap production deploy"
 alias obash="vim ~/.bash_profile"
 alias rebash="source ~/.bash_profile"
 alias rn-ios="react-native run-ios"
-
-### hub bash completion
-if [ -f hub.bash_completion.sh ]; then
-  . hub.bash_completion.sh
-fi
-
-eval "$(hub alias -s)"
 
 ### bash completion
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
