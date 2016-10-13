@@ -18,9 +18,13 @@ alias rebash="source ~/.bash_profile"
 alias rn-ios="react-native run-ios"
 
 ### bash completion
+# source /usr/local/etc/bash_completion.d/git-completion.bash
+
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
   . $(brew --prefix)/etc/bash_completion
 fi
+
+__git_complete g _git
 
 ### function for using g as git and if just g then it calls git status
 g() {
