@@ -16,6 +16,8 @@ alias cpd="cap production deploy"
 alias obash="vim ~/.bash_profile"
 alias rebash="source ~/.bash_profile"
 alias rn-ios="react-native run-ios"
+alias rc="rails c"
+alias rs="rails s"
 
 ### bash completion
 # source /usr/local/etc/bash_completion.d/git-completion.bash
@@ -25,6 +27,8 @@ if [ -f $(brew --prefix)/etc/bash_completion ]; then
 fi
 
 __git_complete g _git
+__git_complete gPo _git_checkout
+__git_complete gpo _git_checkout
 
 ### function for using g as git and if just g then it calls git status
 g() {
@@ -48,6 +52,19 @@ export PS1="Macbook Pro:\u \e[0;31m\W\e[m\e[0;32m\$(__git_ps1)\[\033[00m\] $\e[m
 function gg() {
   URL=$(cat .git/config | grep github | sed -E 's/^.*(github\.com):(.*)(\.git)?/http:\/\/\1\/\2/')
   open $URL
+}
+
+function lpr() {
+ USER=$(cat .git/config | grep github | sed -E 's/^.*(github\.com):(.*)\/(.*)\.git?/\2/')
+  # open 'https://github.com/pulls?utf8=%E2%9C%93&q=is%3Aopen+is%3Apr+user%3ABallantineDigitalMedia'
+  open "https://github.com/pulls?utf8=%E2%9C%93&q=is%3Aopen+is%3Apr+user%3A$USER"
+}
+
+function pr(){
+ USER=$(cat .git/config | grep github | sed -E 's/^.*(github\.com):(.*)\/(.*)\.git?/\2/')
+ REPO=$(cat .git/config | grep github | sed -E 's/^.*(github\.com):(.*)\/(.*)\.git?/\3/')
+ BRANCH=$(__git_ps1 | tr -d '()' | tr -d '[:space:]')
+ open "https://github.com/$USER/$REPO/compare/$BRANCH?expand=1"
 }
 
 ### Added by the Heroku Toolbelt
