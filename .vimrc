@@ -8,48 +8,49 @@
   set rtp+=~/.vim/bundle/Vundle.vim
   call vundle#begin()
 
-   Plugin 'gmarik/Vundle.vim'                " let Vundle manage Vundle, required
-   Plugin 'tpope/vim-fugitive'              " git interaction from within vim
-   Plugin 'scrooloose/nerdtree'              " file menu
-   Plugin 'ctrlpvim/ctrlp.vim'               " fuzzy file finder
-   Plugin 'scrooloose/syntastic'             " syntax checker
-   Plugin 'godlygeek/tabular'                " for indentation
    Plugin 'airblade/vim-gitgutter'           " git diff in gutter
-   Plugin 'christoomey/vim-tmux-navigator'   " easy navigation b/w vim & tmux
-   Plugin 'tpope/vim-commentary'             " easily use comments
-   Plugin 'terryma/vim-multiple-cursors'     " multiple cursors
-   Plugin 'kchmck/vim-coffee-script'         " coffeescript syntax & indent
-   Plugin 'mileszs/ack.vim'                  " searching via :Ack
-   Plugin 'rking/ag.vim'                     " more searching
-   Plugin 'vim-ruby/vim-ruby'                " ruby syntax & indent
-   Plugin 'tpope/vim-markdown'               " markdown syntax & indent
-   Plugin 'pangloss/vim-javascript'          " javascript syntax & indent
-   Plugin 'othree/html5.vim'                 " html5 syntax & indent
-   Plugin 'tpope/vim-haml'                   " haml syntax & indent
-   Plugin 'mustache/vim-mustache-handlebars' " mustache/handlebars syntax & indent
-   Plugin 'thoughtbot/vim-rspec'             " Vim RSPEC runner
    Plugin 'benmills/vimux'                   " Vim + Tmux Goodness
-   Plugin 'nathanaelkane/vim-indent-guides'  " Indent guides to keep your code aligned
-   Plugin 'darfink/vim-plist'                 " PLIST Syntax Highlighting / indentation
-   Plugin 'tpope/vim-endwise'                " auto end addition in ruby
-   Plugin 't9md/vim-ruby-xmpfilter'          " inline ruby completion
-   Plugin 'wesQ3/vim-windowswap'             " window swapping
    Plugin 'bling/vim-airline'                " nice looking footer bar
-   Plugin 'wting/rust.vim'                   " rust syntax & indent
-   Plugin 'godlygeek/csapprox'               " better gvim color support
    Plugin 'briancollins/vim-jst'             " JST / EJS syntax
    Plugin 'chriskempson/base16-vim'          " base 16 colorscheme
-   Plugin 'mxw/vim-jsx'                      " vim syntax highlighting / indent for jsx
-   Plugin 'mattn/emmet-vim'                  " emmet stuff for vim [http://emmet.io/]
-   Plugin 'jordwalke/flatlandia'
-   Plugin 'tpope/vim-surround'
-   Plugin 'tpope/vim-rails'
-   Plugin 'MarcWeber/vim-addon-mw-utils'    " These next three all support tab completion snipmate functionality
-   Plugin 'tomtom/tlib_vim'
+   Plugin 'christoomey/vim-sort-motion'
+   Plugin 'christoomey/vim-tmux-navigator'   " easy navigation b/w vim & tmux
+   Plugin 'ctrlpvim/ctrlp.vim'               " fuzzy file finder
+   Plugin 'darfink/vim-plist'                 " PLIST Syntax Highlighting / indentation
    Plugin 'garbas/vim-snipmate'
-   Plugin 'tpope/vim-unimpaired'            " Allows for adding new lines above and below your current line and switching lines
-   Plugin 'tpope/vim-repeat'                " Allows plugins to repeat
+   Plugin 'gmarik/Vundle.vim'                " let Vundle manage Vundle, required
+   Plugin 'godlygeek/csapprox'               " better gvim color support
+   Plugin 'godlygeek/tabular'                " for indentation
+   Plugin 'jordwalke/flatlandia'
+   Plugin 'kchmck/vim-coffee-script'         " coffeescript syntax & indent
+   Plugin 'marcWeber/vim-addon-mw-utils'    " These next three all support tab completion snipmate functionality
+   Plugin 'mattn/emmet-vim'                  " emmet stuff for vim [http://emmet.io/]
+   Plugin 'mileszs/ack.vim'                  " searching via :Ack
+   Plugin 'mustache/vim-mustache-handlebars' " mustache/handlebars syntax & indent
+   Plugin 'mxw/vim-jsx'                      " vim syntax highlighting / indent for jsx
+   Plugin 'nathanaelkane/vim-indent-guides'  " Indent guides to keep your code aligned
+   Plugin 'othree/html5.vim'                 " html5 syntax & indent
+   Plugin 'pangloss/vim-javascript'          " javascript syntax & indent
+   Plugin 'rking/ag.vim'                     " more searching
+   Plugin 'scrooloose/nerdtree'              " file menu
+   Plugin 'scrooloose/syntastic'             " syntax checker
+   Plugin 't9md/vim-ruby-xmpfilter'          " inline ruby completion
+   Plugin 'terryma/vim-multiple-cursors'     " multiple cursors
+   Plugin 'thoughtbot/vim-rspec'             " Vim RSPEC runner
    Plugin 'tommcdo/vim-exchange'
+   Plugin 'tomtom/tlib_vim'
+   Plugin 'tpope/vim-commentary'             " easily use comments
+   Plugin 'tpope/vim-endwise'                " auto end addition in ruby
+   Plugin 'tpope/vim-fugitive'              " git interaction from within vim
+   Plugin 'tpope/vim-haml'                   " haml syntax & indent
+   Plugin 'tpope/vim-markdown'               " markdown syntax & indent
+   Plugin 'tpope/vim-rails'
+   Plugin 'tpope/vim-repeat'                " Allows plugins to repeat
+   Plugin 'tpope/vim-surround'
+   Plugin 'tpope/vim-unimpaired'            " Allows for adding new lines above and below your current line and switching lines
+   Plugin 'vim-ruby/vim-ruby'                " ruby syntax & indent
+   Plugin 'wesQ3/vim-windowswap'             " window swapping
+   Plugin 'wting/rust.vim'                   " rust syntax & indent
 
    " forked this, made some mods and pulling from my own repo
    Plugin 'awortham/vim-snippets'
