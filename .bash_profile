@@ -54,13 +54,6 @@ g() {
   fi
 }
 
-function sdot() {
- sudo cp ~/.bash_profile ~/dotfiles/.bash_profile
- cp ~/.vimrc ~/dotfiles/.vimrc
- cp ~/.pryrc ~/dotfiles/.pryrc
- cd ~/dotfiles
-}
-
 function prompt_rvm {
   rbv=`rvm-prompt`
   rbv=${rbv#ruby-}
