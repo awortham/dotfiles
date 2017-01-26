@@ -30,6 +30,10 @@ alias cp="cp -v"
 alias rm="rm -v"
 alias mv="mv -v"
 
+symlink() {
+  ln -sv dotfiles/$1 $1
+}
+
 ### bash completion
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
   . $(brew --prefix)/etc/bash_completion
