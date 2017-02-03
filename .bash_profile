@@ -2,14 +2,9 @@ export CLICOLOR=1 export LSCOLORS=GxFxCxDxBxegedabagaced
 export EDITOR=/usr/bin/vim
 
 ### aliases
-alias RJ="RAILS_ENV=journal_dev"
-alias RP="RAILS_ENV=prt_dev"
-alias cdb="cd ~/Documents/ballantine_communications"
 alias cdp="cd ~/Documents/personal"
 alias cop="rubocop"
 alias cp="cp -v"
-alias cpd="cap production deploy"
-alias csd="cap staging deploy"
 alias dotfiles="cd ~/dotfiles"
 alias fixdb="rake db:drop db:create db:migrate db:seed"
 alias gPo="git push origin "
@@ -22,13 +17,12 @@ alias mv="mv -v"
 alias obash="vim ~/.bash_profile"
 alias overview="open 'https://github.com/awortham?tab=overview&from="$(date '+%Y-%m-%d')"'"
 alias ovim="vim ~/.vimrc"
-alias pow="launchctl stop cs.pow.powd"
 alias rc="rails c"
 alias rebash="source ~/.bash_profile && echo 'Your bash profile has been reloaded'"
-alias rjs="RAILS_ENV=journal_dev rails s -p 3001 -P 42342"
+alias rjs="RAILS_ENV=journal_des rails s -p 3001 -P 42342"
 alias rm="rm -v"
 alias rn-ios="react-native run-ios"
-alias rps="RAILS_ENV=prt_dev rails s -p 3002 -P 42344"
+alias rps="RAILS_ENV=prt_des rails s -p 3002 -P 42344"
 alias rr="rake routes"
 alias rs="rails s"
 
@@ -54,15 +48,14 @@ g() {
   fi
 }
 
-function prompt_rvm {
-  rbv=`rvm-prompt`
-  rbv=${rbv#ruby-}
+function prompt_rbenv {
+  rbv=eval rbenv version | sed -e 's/ .*//'
   echo $rbv
 }
 
 ### function to display git branch in standard readout
 source ~/.git-prompt.sh
-export PS1="\u: \e[0;34m\$(prompt_rvm) \e[0;31m\W\e[m\e[0;32m\$(__git_ps1)\[\033[00m\] $\e[m "
+export PS1="\u: \e[0;34m\$(prompt_rbenv) \e[0;31m\W\e[m\e[0;32m\$(__git_ps1)\[\033[00m\] $\e[m "
 
 ### open git directory on github
 function gg() {
@@ -101,3 +94,6 @@ source ~/.iterm2_shell_integration.`basename $SHELL`
 if [ $ITERM_SESSION_ID ]; then
   export PROMPT_COMMAND='echo -ne "\033];${PWD##*/}\007"; ';iterm2_preexec_invoke_cmd
 fi
+
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
