@@ -3,6 +3,7 @@ export EDITOR=/usr/bin/vim
 
 ### aliases
 alias cdp="cd ~/Documents/personal"
+alias code="cd ~/Code"
 alias cop="rubocop"
 alias cp="cp -v"
 alias dotfiles="cd ~/dotfiles"
@@ -17,6 +18,8 @@ alias mv="mv -v"
 alias obash="vim ~/.bash_profile"
 alias overview="open 'https://github.com/awortham?tab=overview&from="$(date '+%Y-%m-%d')"'"
 alias ovim="vim ~/.vimrc"
+alias pd="pco deploy"
+alias pdp="pco deploy production"
 alias rc="rails c"
 alias rebash="source ~/.bash_profile && echo 'Your bash profile has been reloaded'"
 alias rjs="RAILS_ENV=journal_des rails s -p 3001 -P 42342"
@@ -29,6 +32,10 @@ alias rs="rails s"
 symlink() {
   ln -sv dotfiles/$1 $1
 }
+
+### rundeck
+export RUNDECK_BROWSERIFY="true"
+export RUNDECK_API_TOKEN="5cvZeJ2UXxwq2cXUNWVsfR41fNJeO6X4"
 
 ### bash completion
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
@@ -65,16 +72,23 @@ function gg() {
 
 ### list all pull requests that your company has across all repos
 function lpr() {
- USER=$(cat .git/config | grep github | sed -E 's/^.*(github\.com):(.*)\/(.*)\.git?/\2/')
-  open "https://github.com/pulls?utf8=%E2%9C%93&q=is%3Aopen+is%3Apr+user%3A$USER"
+  # USER=$(cat .git/config | grep github | sed -E 's/^.*(github\.com):(.*)\/(.*)\.git?/\2/')
+ # echo $USER
+  # open "https://github.com/pulls?utf8=%E2%9C%93&q=is%3Aopen+is%3Apr+user%3A$USER"
+  open "https://github.com/ministrycentered/registrations/pulls"
+  # echo "https://$USER/pulls"
 }
 
 ### create a pull request for your current branch
 function pr(){
  USER=$(cat .git/config | grep github | sed -E 's/^.*(github\.com):(.*)\/(.*)\.git?/\2/')
  REPO=$(cat .git/config | grep github | sed -E 's/^.*(github\.com):(.*)\/(.*)\.git?/\3/')
- BRANCH=$(__git_ps1 | tr -d '()' | tr -d '[:space:]')
- open "https://github.com/$USER/$REPO/compare/$BRANCH?expand=1"
+ BRANCH=$(__git_ps1 | tr -d '()' | tr -d '[:space:]' | set -E '*/\/')
+ echo $USER
+ echo $REPO
+ echo $BRANCH
+ # open "https://github.com/ministrycentered/registrations/awortham/$BRANCH?expand=1"
+ # open "https://github.com/ministrycentered/$REPO/compare/$BRANCH?expand=1"
 }
 
 ### This allows you to fire up a Rails server and then connect via your phone.
@@ -97,3 +111,7 @@ fi
 
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
+
+eval "$(~/Code/pco/bin/pco init -)"
+
+ssh-add ~/.ssh/pco_servers
