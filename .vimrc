@@ -12,7 +12,6 @@
     Plugin 'benmills/vimux'                   " Vim + Tmux Goodness
     Plugin 'bling/vim-airline'                " nice looking footer bar
     Plugin 'briancollins/vim-jst'             " JST / EJS syntax
-    " Plugin 'chriskempson/base16-vim'          " base 16 colorscheme
     Plugin 'flazz/vim-colorschemes'
     Plugin 'christoomey/vim-sort-motion'
     Plugin 'christoomey/vim-tmux-navigator'   " easy navigation b/w vim & tmux
@@ -28,7 +27,6 @@
     Plugin 'mattn/emmet-vim'                  " emmet stuff for vim [http://emmet.io/]
     Plugin 'mileszs/ack.vim'                  " searching via :Ack
     Plugin 'mustache/vim-mustache-handlebars' " mustache/handlebars syntax & indent
-    " Plugin 'mxw/vim-jsx'                      " vim syntax highlighting / indent for jsx
     Plugin 'nathanaelkane/vim-indent-guides'  " Indent guides to keep your code aligned
     Plugin 'othree/html5.vim'                 " html5 syntax & indent
     Plugin 'pangloss/vim-javascript'          " javascript syntax & indent
@@ -80,6 +78,8 @@
       set number                   " display line numbers
       set relativenumber
       set visualbell               " use visual bell
+
+      set noro
 
       set background=dark          " Dark background
       set laststatus=2             " Fix for statusbar toggling
@@ -164,7 +164,7 @@
 
       let base16colorspace=256
 
-      let &colorcolumn=join(range(81,999),",")
+      let &colorcolumn=join(range(121,999),",")
       " highlight ColorColumn ctermbg=235 guibg=#2c2d27
       highlight SignColumn ctermbg=NONE guibg=NONE gui=NONE
 
@@ -268,8 +268,8 @@
       let g:ackprg = 'ag --nogroup --nocolor --column'
 
       "- Rspec.vim  -----------------------------------------------------------------------------------
-      " let g:rspec_command = '!bundle exec bin/rspec {spec}'  " use spring w/ rspec runner
-      let g:rspec_command = '!bundle exec rspec {spec}'      " dont use spring w/ rspec runner
+      let g:rspec_command = '!bundle exec bin/rspec {spec}'  " use spring w/ rspec runner
+      " let g:rspec_command = '!bundle exec rspec {spec}'      " dont use spring w/ rspec runner
       let g:rspec_runner = 'os_x_iterm'
       map <Leader>t :call RunCurrentSpecFile()<CR>
       map <Leader>s :call RunNearestSpec()<CR>

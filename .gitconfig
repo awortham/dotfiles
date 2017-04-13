@@ -22,5 +22,15 @@
 	b = branch
 	last = log -1 HEAD
 	mup = !git checkout master && git pull
+  trim = fetch -p
+  pr = !hub pull-request -o
+  lom = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative origin/master..head
+  rema = !git fetch && git rebase --interactive --autosquash origin/master
+  pu = !git pull origin `git rev-parse --abbrev-ref HEAD`
+  take = "!f() { git co -b awortham/$1; }; f"
 [push]
-  default = upstream
+  default = current
+[credential]
+	helper = osxkeychain
+[rebase]
+	autosquash = true

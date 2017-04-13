@@ -22,12 +22,15 @@ alias pd="pco deploy"
 alias pdp="pco deploy production"
 alias rc="rails c"
 alias rebash="source ~/.bash_profile && echo 'Your bash profile has been reloaded'"
-alias rjs="RAILS_ENV=journal_des rails s -p 3001 -P 42342"
 alias rm="rm -v"
 alias rn-ios="react-native run-ios"
 alias rps="RAILS_ENV=prt_des rails s -p 3002 -P 42344"
-alias rr="rake routes"
+alias rr="bundle exec rake routes"
 alias rs="rails s"
+alias server="tail -f log/development.log"
+alias rserver="touch tmp/restart.txt"
+
+eval "$(hub alias -s)"
 
 symlink() {
   ln -sv dotfiles/$1 $1
@@ -70,25 +73,19 @@ function gg() {
   open $URL
 }
 
-### list all pull requests that your company has across all repos
-function lpr() {
+### list pull requests by repo
+function lppr() {
   # USER=$(cat .git/config | grep github | sed -E 's/^.*(github\.com):(.*)\/(.*)\.git?/\2/')
- # echo $USER
   # open "https://github.com/pulls?utf8=%E2%9C%93&q=is%3Aopen+is%3Apr+user%3A$USER"
-  open "https://github.com/ministrycentered/registrations/pulls"
-  # echo "https://$USER/pulls"
+  open "https://github.com/ministrycentered/people/pulls/awortham"
 }
 
-### create a pull request for your current branch
-function pr(){
- USER=$(cat .git/config | grep github | sed -E 's/^.*(github\.com):(.*)\/(.*)\.git?/\2/')
- REPO=$(cat .git/config | grep github | sed -E 's/^.*(github\.com):(.*)\/(.*)\.git?/\3/')
- BRANCH=$(__git_ps1 | tr -d '()' | tr -d '[:space:]' | set -E '*/\/')
- echo $USER
- echo $REPO
- echo $BRANCH
- # open "https://github.com/ministrycentered/registrations/awortham/$BRANCH?expand=1"
- # open "https://github.com/ministrycentered/$REPO/compare/$BRANCH?expand=1"
+function lrpr() {
+  open "https://github.com/ministrycentered/registrations/pulls/awortham"
+}
+
+function lapr {
+  open "https://github.com/ministrycentered/accounts/pulls/awortham"
 }
 
 ### This allows you to fire up a Rails server and then connect via your phone.
@@ -113,5 +110,28 @@ export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
 eval "$(~/Code/pco/bin/pco init -)"
+
+
+name() {
+  branch=$(git rev-parse --abbrev-ref HEAD)
+  echo $branch
+
+  if [ $branch != "master" ] && [ $branch != "staging" ]; then
+    if [[ $branch == *"awortham"* ]]; then
+      echo "branch is not master or staging and has awortham in name"
+    else
+      echo "not master or staging, and does not have awortham in name"
+      echo "awortham/${branch}"
+    fi
+  else
+    echo "branch"
+  fi
+
+  # if [ $branch == *"awortham"* ] && [ $branch != "master" ] && [ $branch != "staging" ]; then
+  #   echo "branch includes name and is not master or staging"
+  # else
+  #   echo "branch does not include name"
+  # fi
+}
 
 ssh-add ~/.ssh/pco_servers
