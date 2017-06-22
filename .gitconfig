@@ -25,12 +25,14 @@
   trim = fetch -p
   pr = !hub pull-request -o
   lom = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative origin/master..head
-  rema = !git fetch && git rebase --interactive --autosquash origin/master
+  rema = !git fetch && git rebase -i origin/master
   pu = !git pull origin `git rev-parse --abbrev-ref HEAD`
   take = "!f() { git co -b awortham/$1; }; f"
+  dt = checkout db/structure.sql
 [push]
   default = current
 [credential]
 	helper = osxkeychain
 [rebase]
 	autosquash = true
+	instructionFormat = (%an <%ae>) %s

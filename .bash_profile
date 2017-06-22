@@ -2,33 +2,43 @@ export CLICOLOR=1 export LSCOLORS=GxFxCxDxBxegedabagaced
 export EDITOR=/usr/bin/vim
 
 ### aliases
+alias cdb="cd ~/Code"
 alias cdp="cd ~/Documents/personal"
 alias code="cd ~/Code"
 alias cop="rubocop"
 alias cp="cp -v"
 alias dotfiles="cd ~/dotfiles"
+alias odots="vim ~/dotfiles"
 alias fixdb="rake db:drop db:create db:migrate db:seed"
+alias fore="foreman start -f Procfile.dev"
 alias gPo="git push origin "
 alias gc="git commit -m "
 alias gca="git commit -am "
 alias gpo="git pull origin "
 alias hosts="sudo vim /etc/hosts"
-alias kts='tmux ls | awk '\''{print $1}'\'' | sed '\''s/://g'\'' | xargs -I{} tmux kill-session -t {}'
 alias mv="mv -v"
 alias obash="vim ~/.bash_profile"
+alias ogit="vim ~/.gitconfig"
 alias overview="open 'https://github.com/awortham?tab=overview&from="$(date '+%Y-%m-%d')"'"
 alias ovim="vim ~/.vimrc"
+alias pc="pco console"
+alias pd="pco deploy"
+alias pdp="pco deploy production"
 alias pd="pco deploy"
 alias pdp="pco deploy production"
 alias rc="rails c"
 alias rebash="source ~/.bash_profile && echo 'Your bash profile has been reloaded'"
 alias rm="rm -v"
 alias rn-ios="react-native run-ios"
-alias rps="RAILS_ENV=prt_des rails s -p 3002 -P 42344"
 alias rr="bundle exec rake routes"
 alias rs="rails s"
 alias server="tail -f log/development.log"
 alias rserver="touch tmp/restart.txt"
+
+
+#tmux aliases
+alias kts='tmux ls | awk '\''{print $1}'\'' | sed '\''s/://g'\'' | xargs -I{} tmux kill-session -t {}'
+alias muxl='tmux list-sessions'
 
 eval "$(hub alias -s)"
 
@@ -111,6 +121,8 @@ eval "$(rbenv init -)"
 
 eval "$(~/Code/pco/bin/pco init -)"
 
+### Add yarn modules to the global path
+export PATH="$PATH:$(yarn global bin)"
 
 name() {
   branch=$(git rev-parse --abbrev-ref HEAD)
