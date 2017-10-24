@@ -279,8 +279,8 @@
       let g:ackprg = 'ag --nogroup --nocolor --column'
 
       "- Rspec.vim  -----------------------------------------------------------------------------------
-      let g:rspec_command = '!bundle exec bin/rspec {spec}'  " use spring w/ rspec runner
-      " let g:rspec_command = '!bundle exec rspec {spec}'      " dont use spring w/ rspec runner
+      " let g:rspec_command = '!bundle exec bin/rspec {spec}'  " use spring w/ rspec runner
+      let g:rspec_command = '!bundle exec rspec {spec}'      " dont use spring w/ rspec runner
       let g:rspec_runner = 'os_x_iterm'
       map <Leader>t :call RunCurrentSpecFile()<CR>
       map <Leader>s :call RunNearestSpec()<CR>
@@ -369,7 +369,7 @@
         set grepprg=ag\ --nogroup\ --nocolor
 
         " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-        let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -U -g ""'
+        let g:ctrlp_user_command = 'ag %s -l -i --nocolor --hidden -U -g ""'
 
         " ag is fast enough that CtrlP doesn't need to cache
         let g:ctrlp_use_caching = 0

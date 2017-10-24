@@ -21,14 +21,15 @@
 	d = diff
 	b = branch
 	last = log -1 HEAD
-	mup = !git checkout master && git pull
-  trim = fetch -p
+	mup = !git checkout master && git pull origin master
   pr = !hub pull-request -o
   lom = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative origin/master..head
   rema = !git fetch && git rebase -i origin/master
   pu = !git pull origin `git rev-parse --abbrev-ref HEAD`
   take = "!f() { git co -b awortham/$1; }; f"
   dt = checkout db/structure.sql
+  db = "!f() { git b -D $1 && git remote prune origin; }; f"
+  dbr = branch-delete '$1'
 [push]
   default = current
 [credential]

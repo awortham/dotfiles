@@ -5,6 +5,8 @@ export EDITOR=/usr/bin/vim
 alias cdb="cd ~/Code"
 alias cdp="cd ~/Documents/personal"
 alias code="cd ~/Code"
+alias cdpeeps="cd ~/Code/people"
+alias cdquix="cd ~/Documents/personal/personal/quiX-schedule/"
 alias cop="rubocop"
 alias cp="cp -v"
 alias dotfiles="cd ~/dotfiles"
@@ -33,14 +35,16 @@ alias rm="rm -v"
 alias rn-ios="react-native run-ios"
 alias rr="bundle exec rake routes"
 alias rs="rails s"
+alias rserver="touch tmp/restart.txt"
 alias server="tail -f log/development.log"
 alias setup="~/pco-development"
-alias rserver="touch tmp/restart.txt"
+alias quix="~/quix-scheduler"
 
 
 #tmux aliases
 alias kts='tmux ls | awk '\''{print $1}'\'' | sed '\''s/://g'\'' | xargs -I{} tmux kill-session -t {}'
 alias muxl='tmux list-sessions'
+alias remux="source ~/.tmux.conf && echo 'Your tmux config has been reloaded'"
 
 eval "$(hub alias -s)"
 
@@ -67,6 +71,14 @@ g() {
     git $@
   else
     git status
+  fi
+}
+
+muxa() {
+  if [[ $# > 0 ]]; then
+    tmux attach -t $@
+  else
+    echo "You must pass in which tmux session to attach to"
   fi
 }
 
@@ -100,6 +112,11 @@ function lapr {
   open "https://github.com/ministrycentered/accounts/pulls/awortham"
 }
 
+### list all my branches on people
+function lpb() {
+  open "https://github.com/ministrycentered/people/branches/yours"
+}
+
 ### This allows you to fire up a Rails server and then connect via your phone.
 ### You must be on the same wifi as the computer is on.
 function rsb() {
@@ -125,6 +142,8 @@ eval "$(~/Code/pco/bin/pco init -)"
 
 ### Add yarn modules to the global path
 export PATH="$PATH:$(yarn global bin)"
+export PATH="$PATH:$(npm bin)"
+export PATH="./node_modules/.bin:$PATH"
 
 name() {
   branch=$(git rev-parse --abbrev-ref HEAD)
