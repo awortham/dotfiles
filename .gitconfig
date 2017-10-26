@@ -4,32 +4,32 @@
 #	user = Aaron Wortham
 #	email = awortham@BCIs-MacBook-Pro-2.local
 [user]
-	name = Aaron Wortham
 	email = wortham.aaron@gmail.com
+	name = Aaron Wortham
 [core]
-	excludesfile = /Users/awortham/.gitignore_global
 	editor = /usr/bin/vim
+	excludesfile = /Users/awortham/.gitignore_global
 [alias]
-	sla = log --oneline --decorate --graph --all
-	glog = log -E -i --grep
-	pretty = log --pretty=format:'%C(yellow)%h%C(reset) - %an [%C(green)%ar%C(reset)] %s'
-	co = checkout
-	unstage = reset
-	uncommit = reset --soft HEAD^
-	alias = config --get-regexp alias
 	aa = add .
-	d = diff
+	alias = config --get-regexp alias
 	b = branch
-	last = log -1 HEAD
-	mup = !git checkout master && git pull origin master
-  pr = !hub pull-request -o
-  lom = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative origin/master..head
-  rema = !git fetch && git rebase -i origin/master
-  pu = !git pull origin `git rev-parse --abbrev-ref HEAD`
-  take = "!f() { git co -b awortham/$1; }; f"
-  dt = checkout db/structure.sql
+	co = checkout
+	d = diff
   db = "!f() { git b -D $1 && git remote prune origin; }; f"
   dbr = branch-delete '$1'
+  dt = checkout db/structure.sql
+	glog = log -E -i --grep
+	last = log -1 HEAD
+  lom = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative origin/master..head
+	mup = !git checkout master && git pull origin master
+  pr = !hub pull-request -o
+	pretty = log --pretty=format:'%C(yellow)%h%C(reset) - %an [%C(green)%ar%C(reset)] %s'
+  pu = !git pull origin `git rev-parse --abbrev-ref HEAD`
+  rema = !git fetch && git rebase -i origin/master
+	sla = log --oneline --decorate --graph --all
+	uncommit = reset --soft HEAD^
+	unstage = reset
+  take = "!f() { git co -b awortham/$1; }; f"
 [push]
   default = current
 [credential]
