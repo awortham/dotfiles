@@ -54,7 +54,6 @@
      Plugin 'cyphactor/vim-open-alternate'
      Plugin 'vim-ruby/vim-ruby'                " ruby syntax & indent
      Plugin 'wesQ3/vim-windowswap'             " window swapping
-     Plugin 'wting/rust.vim'                   " rust syntax & indent
      Plugin 'maxmellon/vim-jsx-pretty'
 
      " forked this, made some mods and pulling from my own repo
@@ -248,8 +247,9 @@
       "- Syntastic ------------------------------------------------------------------------------------
       let g:syntastic_mode_map={ 'mode': 'active',
             \ 'active_filetypes': [],
-            \ 'passive_filetypes': ['html'] } " disable checking for html
+            \ 'passive_filetypes': ['html', 'css', 'scss'] } " disable checking for html and css
 
+      let g:syntastic_javascript_eslint_exe='$(npm bin)/eslint'
       let g:syntastic_javascript_checkers = ['eslint']
 
       "- Markdown ------------------------------------------------------------------------------------
@@ -282,13 +282,16 @@
       let g:ackprg = 'ag --nogroup --nocolor --column'
 
       "- Rspec.vim  -----------------------------------------------------------------------------------
-      " let g:rspec_command = '!bundle exec bin/rspec {spec}'  " use spring w/ rspec runner
-      let g:rspec_command = '!bundle exec rspec {spec}'      " dont use spring w/ rspec runner
+      let g:rspec_command = '!bundle exec bin/rspec {spec}'  " use spring w/ rspec runner
+      " let g:rspec_command = '!bundle exec rspec {spec}'      " dont use spring w/ rspec runner
       let g:rspec_runner = 'os_x_iterm'
       map <Leader>t :call RunCurrentSpecFile()<CR>
       map <Leader>s :call RunNearestSpec()<CR>
       map <Leader>l :call RunLastSpec()<CR>
       map <Leader>a :call RunAllSpecs()<CR>
+
+      "- Rubocop set the correct file to use
+      let g:vimrubocop_config = '~/Code/people/.rubocop.yml'
 
       "- XMPFilter  ------------------------------------------------------------------------------------
       map <C-b> <Plug>(xmpfilter-mark)<Plug>(xmpfilter-run)
