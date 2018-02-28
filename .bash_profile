@@ -35,18 +35,19 @@ alias rm="rm -v"
 alias rn-ios="react-native run-ios"
 alias rr="bundle exec rake routes"
 alias rs="rails s"
-alias rserver="touch tmp/restart.txt"
+alias rserver="box restart-app"
 alias server="tail -f log/development.log"
 alias setup="~/pco-development"
 alias quix="~/quix-scheduler"
-
 
 #tmux aliases
 alias kts='tmux ls | awk '\''{print $1}'\'' | sed '\''s/://g'\'' | xargs -I{} tmux kill-session -t {}'
 alias muxl='tmux list-sessions'
 alias remux="source ~/.tmux.conf && echo 'Your tmux config has been reloaded'"
 
-eval "$(hub alias -s)"
+# I don't think I need this anymore. It was throwing an error when I loaded a new bash window and the
+# g pr command still works without it. So I'm really not sure what this was doing anyway.
+# eval "$(hub alias -s)"
 
 symlink() {
   ln -sv dotfiles/$1 $1
@@ -74,6 +75,14 @@ g() {
   fi
 }
 
+# bake() {
+#   if [[ $# > 0 ]]; then
+#     bundle exec rake $@
+#   else
+#     bundle exec rake
+#   fi
+# }
+
 muxa() {
   if [[ $# > 0 ]]; then
     tmux attach -t $@
@@ -89,7 +98,7 @@ function prompt_rbenv {
 
 ### function to display git branch in standard readout
 source ~/.git-prompt.sh
-export PS1="\u: \e[0;34m\$(prompt_rbenv) \e[0;31m\W\e[m\e[0;32m\$(__git_ps1)\[\033[00m\] $\e[m "
+export PS1="\e[0;34m\$(prompt_rbenv) \e[0;31m\W\e[m\e[0;32m\$(__git_ps1)\[\033[00m\] $\e[m "
 
 ### open git directory on github
 function gg() {
@@ -132,7 +141,7 @@ source ~/.iterm2_shell_integration.`basename $SHELL`
 
 ### Labels your current bash tab
 if [ $ITERM_SESSION_ID ]; then
-  export PROMPT_COMMAND='echo -ne "\033];${PWD##*/}\007"; ';iterm2_preexec_invoke_cmd
+  export PROMPT_COMMAND='echo -ne "\033];${PWD##*/}\007"; ';
 fi
 
 export PATH="$HOME/.rbenv/bin:$PATH"
@@ -168,3 +177,21 @@ name() {
 }
 
 ssh-add ~/.ssh/pco_servers
+export RBENV_ROOT=$HOME/.rbenv
+export MYSQL_PORT_3306_TCP_ADDR=127.0.0.1
+export MYSQL_SLAVE_PORT_3306_TCP_ADDR=127.0.0.1
+export MYSQL_SLAVE_PORT_3306_TCP_PORT=3307
+export PATH=/Users/aaronwortham/pco-box/bin:/usr/local/bin:$PATH
+eval "$(rbenv init -)"
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+export FZF_DEFAULT_OPTS='
+  -i
+  --color=info:#303030
+'
+# This was an attempt to make fzf use the silver searcher so that it used the gitignore. However, in my vim setup,
+# I don't know how to make it use the standard fzf command. I either have :Files or :Gfiles.
+# export FZF_DEFAULT_COMMAND='ag --nogroup --nocolor --column'
+export FZF_DEFAULT_COMMAND='ag -g ""'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+

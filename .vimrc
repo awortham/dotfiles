@@ -6,15 +6,15 @@
 
     " initialize Vundle and rebuild helptags
    set rtp+=~/.vim/bundle/Vundle.vim
+   set rtp+=/usr/local/opt/fzf
    call vundle#begin()
-
 
      Plugin 'bling/vim-airline'                " nice looking footer bar
      Plugin 'briancollins/vim-jst'             " JST / EJS syntax
      Plugin 'flazz/vim-colorschemes'
      Plugin 'christoomey/vim-sort-motion'
      Plugin 'christoomey/vim-tmux-navigator'   " easy navigation b/w vim & tmux
-     Plugin 'ctrlpvim/ctrlp.vim'               " fuzzy file finder
+     " Plugin 'ctrlpvim/ctrlp.vim'               " fuzzy file finder
      Plugin 'darfink/vim-plist'                 " PLIST Syntax Highlighting / indentation
      Plugin 'garbas/vim-snipmate'
      Plugin 'gmarik/Vundle.vim'                " let Vundle manage Vundle, required
@@ -30,6 +30,9 @@
      Plugin 'othree/html5.vim'                 " html5 syntax & indent
      Plugin 'pangloss/vim-javascript'          " javascript syntax & indent
      Plugin 'rking/ag.vim'                     " more searching
+     Plugin 'junegunn/fzf', { 'dir': '/usr/local/opt/fzf', 'do': './install --bin' }
+     Plugin 'junegunn/fzf.vim'
+     Plugin 'ngmy/vim-rubocop'
      Plugin 'sbdchd/neoformat'
      Plugin 'scrooloose/nerdtree'              " file menu
      Plugin 'scrooloose/syntastic'             " syntax checker
@@ -363,15 +366,12 @@
       endfunction
       command! -complete=shellcmd -nargs=+ Shell call s:ExecuteInShell(<q-args>)
 
-      " The Silver Searcher
-      if executable('ag')
-        " Use ag over grep
-        set grepprg=ag\ --nogroup\ --nocolor
+      "= FZF =========================================================================
+      let g:fzf_buffers_jump = 1
 
-        " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-        let g:ctrlp_user_command = 'ag %s -l -i --nocolor --hidden -U -g ""'
+      " Open FZF
+      noremap <C-p> :Files<CR>
 
-        " ag is fast enough that CtrlP doesn't need to cache
-        let g:ctrlp_use_caching = 0
-      endif
-
+      " Default fzf layout
+      " - down / up / left / right
+      let g:fzf_layout = { 'down': '~30%' }
