@@ -21,6 +21,8 @@
 	glog = log -E -i --grep
 	last = log -1 HEAD
   lom = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative origin/master..head
+  lomin = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative origin/master..head --author='Aaron Wortham'
+  mine = log --pretty=format:'%C(yellow)%h%C(reset) - %an [%C(green)%ar%C(reset)] %s' --author='Aaron Wortham'
 	mup = !git checkout master && git pull origin master
   pr = !hub pull-request -o
 	pretty = log --pretty=format:'%C(yellow)%h%C(reset) - %an [%C(green)%ar%C(reset)] %s'
@@ -30,6 +32,7 @@
 	uncommit = reset --soft HEAD^
 	unstage = reset
   take = "!f() { git co -b awortham/$1; }; f"
+  reorient = "!f() { git push origin +master:$1 && git reset --hard origin/$1 ; }; f"
 [push]
   default = current
 [credential]
