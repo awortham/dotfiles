@@ -38,7 +38,8 @@
      Plugin 'scrooloose/syntastic'             " syntax checker
      Plugin 'slim-template/vim-slim.git'
      Plugin 't9md/vim-ruby-xmpfilter'          " inline ruby completion
-     Plugin 'thoughtbot/vim-rspec'             " Vim RSPEC runner
+     " Plugin 'thoughtbot/vim-rspec'             " Vim RSPEC runner
+     Plugin 'janko/vim-test'
      Plugin 'tommcdo/vim-exchange'
      Plugin 'tomtom/tlib_vim'
      Plugin 'tpope/vim-commentary'             " easily use comments
@@ -69,12 +70,13 @@
 
      syntax on                    " turn on syntax highilghting
 
+      au InsertLeave * set nopaste " hoping this helps with neovim putting me in insert paste mode
+
       filetype plugin on           " enable loading plugins for filetypes
       runtime macros/matchit.vim
       filetype indent on           " enable loading 'indent files' for filetypes
 
       set synmaxcol=400            " no syntax highlighting for lines longer than 200 cols
-
       set laststatus=2             " show status bar
       let g:vim_jsx_pretty_colorful_config = 1 " default 0
 
@@ -100,7 +102,9 @@
 
       set ttyfast                  " improve screen refresh for terminal vim
       set lazyredraw               " don't redraw while executing macros. async window title update
-      set ttyscroll=3              " something about scrolling buffer size
+      if !has('nvim')
+        set ttyscroll=3              " something about scrolling buffer size
+      endif
 
       set scrolloff=3              " start scrolling 3 lines from bottom
       set sidescrolloff=6          " start scrolling 6 lines from right
@@ -108,7 +112,7 @@
 
       set mouse=a                  " allow mouse usage
       set clipboard=unnamed        " set default yank register to machine clipboard
-
+      nnoremap p p`]<Esc>
       set nofoldenable             " disable folding
 
 "     "- Wrapping -------------------------------------------------------------------------------------
@@ -151,8 +155,9 @@
       " prettier setup
       autocmd BufWritePre *.js Neoformat
       autocmd BufWritePre *.jsx Neoformat
-      autocmd FileType javascript set formatprg=prettier\ --stdin\ --no-semi\ --trailing-comma=es5
+      autocmd FileType javascript set formatprg=./node_modules/prettier/bin-prettier.js\ --stdin\ --single-quote\ --no-semi\ --trailing-comma\ es5\ --parser\ babylon
       let g:neoformat_try_formatprg = 1
+      "let g:neoformat_only_msg_on_error = 1
 
 
 "       "- Git Commit
@@ -231,6 +236,7 @@
       nmap <leader>r :noh<cr>
       " toggle Paste mode, comments above b/c of Vim's interpretation of them jumping my cursor
       nnoremap <F6> :set paste!<cr>
+
       " toggle No Highlight mode, comments above b/c of Vim's interpretation of them jumping my cursor
       nnoremap <F7> :noh<cr>
 
@@ -281,17 +287,19 @@
       "- Ack ------------------------------------------------------------------------------------------
       let g:ackprg = 'ag --nogroup --nocolor --column'
 
-      "- Rspec.vim  -----------------------------------------------------------------------------------
-      let g:rspec_command = '!bundle exec bin/rspec {spec}'  " use spring w/ rspec runner
-      " let g:rspec_command = '!bundle exec rspec {spec}'      " dont use spring w/ rspec runner
-      let g:rspec_runner = 'os_x_iterm'
-      map <Leader>t :call RunCurrentSpecFile()<CR>
-      map <Leader>s :call RunNearestSpec()<CR>
-      map <Leader>l :call RunLastSpec()<CR>
-      map <Leader>a :call RunAllSpecs()<CR>
+      " vim-test
+      nmap <silent> <leader>s :TestNearest<CR>
+      nmap <silent> <leader>t :TestFile<CR>
+      nmap <silent> <leader>a :TestSuite<CR>
+      nmap <silent> <CR> :TestLast<CR>
+      nmap <silent> <leader>g :TestVisit<CR>
+      let test#strategy = "neovim"
+      let test#ruby#use_spring_binstub = 1
+      let g:test#preserve_screen = 1
 
       "- Rubocop set the correct file to use
-      let g:vimrubocop_config = '~/Code/people/.rubocop.yml'
+      let g:vimrubocop_config = '~/Code/services/.rubocop.yml'
+      map <Leader>z :RuboCop<CR>
 
       "- XMPFilter  ------------------------------------------------------------------------------------
       map <C-b> <Plug>(xmpfilter-mark)<Plug>(xmpfilter-run)
@@ -304,11 +312,8 @@
       "= Airline ========================================================================================
       let g:airline_powerline_fonts = 1
 
-      "= Goyo & Limelight ===============================================================================
-      autocmd User GoyoEnter Limelight
-      autocmd User GoyoLeave Limelight!
-      let g:goyo_width = 120
-      nnoremap <Leader>G :Goyo<CR>
+      "= Git Commands ===============================
+      nnoremap <Leader>g :Gstatus<CR>
 
       "= Language Specific Settings======================================================================
 
@@ -341,16 +346,6 @@
 
       "- HBARS ------------------------------------------------------------------------------------
       au BufNewFile,BufRead *.hbars set ft=haml       " set syntax to haml, even tho it's not ruby, for hbars files
-
-      "= Enter Key ======================================================================================
-
-      function! MapCR()
-        if (&ft=='ruby')
-          :call RunLastSpec()
-        endif
-      endfunction
-
-      :nnoremap <cr> :call MapCR()<cr>
 
       "= For running commands in a new window ========================================================
       function! s:ExecuteInShell(command)

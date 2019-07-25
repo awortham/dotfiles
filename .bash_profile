@@ -2,10 +2,12 @@ export CLICOLOR=1 export LSCOLORS=GxFxCxDxBxegedabagaced
 export EDITOR=/usr/bin/vim
 
 ### aliases
+alias barn="bundle && yarn"
 alias cdb="cd ~/Code"
 alias cdp="cd ~/Documents/personal"
 alias code="cd ~/Code"
 alias cdpeeps="cd ~/Code/people"
+alias cdservs="cs ~/Code/people"
 alias cdquix="cd ~/Documents/personal/personal/quiX-schedule/"
 alias cop="rubocop"
 alias cp="cp -v"
@@ -13,14 +15,17 @@ alias dotfiles="cd ~/dotfiles"
 alias odots="vim ~/dotfiles"
 alias fixdb="rake db:drop db:create db:migrate db:seed"
 alias fore="foreman start -f Procfile.dev"
+alias git-delete-merged-branches='git checkout -q master && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base master $branch) && [[ $(git cherry master $(git commit-tree $(git rev-parse $branch^{tree}) -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; git remote prune origin; git fetch -p; done'
 alias gPo="git push origin "
 alias gc="git commit -m "
 alias gca="git commit -am "
 alias gpo="git pull origin "
 alias hosts="sudo vim /etc/hosts"
+alias vim="nvim"
 alias mv="mv -v"
 alias obash="vim ~/.bash_profile"
 alias ogit="vim ~/.gitconfig"
+alias okit="vim ~/.config/kitty/kitty.conf"
 alias omux="vim ~/.tmux.conf"
 alias overview="open 'https://github.com/awortham?tab=overview&from="$(date '+%Y-%m-%d')"'"
 alias ovim="vim ~/.vimrc"
@@ -38,6 +43,9 @@ alias rs="rails s"
 alias rserver="box restart-app"
 alias server="tail -f log/development.log"
 alias setup="~/pco-development"
+alias usezsh="chsh -s /bin/zsh"
+alias usebash="chsh -s /bin/bash"
+alias shell="echo $SHELL"
 alias quix="~/quix-scheduler"
 
 #tmux aliases
@@ -45,11 +53,16 @@ alias kts='tmux ls | awk '\''{print $1}'\'' | sed '\''s/://g'\'' | xargs -I{} tm
 alias muxl='tmux list-sessions'
 alias remux="source ~/.tmux.conf && echo 'Your tmux config has been reloaded'"
 
-# I don't think I need this anymore. It was throwing an error when I loaded a new bash window and the
-# g pr command still works without it. So I'm really not sure what this was doing anyway.
-# eval "$(hub alias -s)"
+#tmux attach alias/function
+muxa() {
+  if [[ $# > 0 ]]; then
+    tmux attach -t $@
+  else
+    echo "You must pass in which tmux session to attach to"
+  fi
+}
 
-symlink() {
+symlinkDotfiles() {
   ln -sv dotfiles/$1 $1
 }
 
@@ -75,19 +88,32 @@ g() {
   fi
 }
 
-# bake() {
-#   if [[ $# > 0 ]]; then
-#     bundle exec rake $@
-#   else
-#     bundle exec rake
-#   fi
-# }
-
-muxa() {
-  if [[ $# > 0 ]]; then
-    tmux attach -t $@
+build() {
+  if [[ -z "$(git diff --shortstat 2> /dev/null)" ]]; then
+    CURRENT_BRANCH=`git rev-parse --abbrev-ref HEAD`
+    CURRENT_PATH=`git rev-parse --show-toplevel`
+    REPO_NAME=`basename $CURRENT_PATH`
+    echo "Building & deploying '$CURRENT_BRANCH'..."
+    git push && \
+    git checkout staging && \
+    git fetch origin && \
+    git reset --hard origin/staging && \
+    git merge --no-edit - && \
+    git push
+    if [[ "$(git branch | grep \*)" == "* staging" ]] ; then
+      git checkout -
+    fi
+    # open "https://github.com/ministrycentered/$REPO_NAME/compare/$CURRENT_BRANCH?expand=1"
   else
-    echo "You must pass in which tmux session to attach to"
+    echo "Index is dirty."
+  fi
+}
+
+bake() {
+  if [[ $# > 0 ]]; then
+    bundle exec rake $@
+  else
+    bundle exec rake
   fi
 }
 
@@ -117,6 +143,10 @@ function lrpr() {
   open "https://github.com/ministrycentered/registrations/pulls/awortham"
 }
 
+function lspr() {
+  open "https://github.com/ministrycentered/services/pulls/awortham"
+}
+
 function lapr {
   open "https://github.com/ministrycentered/accounts/pulls/awortham"
 }
@@ -125,6 +155,12 @@ function lapr {
 function lpb() {
   open "https://github.com/ministrycentered/people/branches/yours"
 }
+
+### list all my checkins pull requests
+function lcpr() {
+  open "https://github.com/ministrycentered/check-ins/pulls/awortham"
+}
+
 
 ### This allows you to fire up a Rails server and then connect via your phone.
 ### You must be on the same wifi as the computer is on.
@@ -195,3 +231,9 @@ export FZF_DEFAULT_OPTS='
 export FZF_DEFAULT_COMMAND='ag -g ""'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
+export PATH="/usr/local/sbin:$PATH"
+
+# Setting PATH for Python 3.7
+# The original version is saved in .bash_profile.pysave
+PATH="/Library/Frameworks/Python.framework/Versions/3.7/bin:${PATH}"
+export PATH

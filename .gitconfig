@@ -24,19 +24,24 @@
   lomin = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative origin/master..head --author='Aaron Wortham'
   mine = log --pretty=format:'%C(yellow)%h%C(reset) - %an [%C(green)%ar%C(reset)] %s' --author='Aaron Wortham'
 	mup = !git checkout master && git pull origin master
-  pr = !hub pull-request -o
+  pr = !hub pull-request -o -l 'Not Ready'
 	pretty = log --pretty=format:'%C(yellow)%h%C(reset) - %an [%C(green)%ar%C(reset)] %s'
   pu = !git pull origin `git rev-parse --abbrev-ref HEAD`
   rema = !git fetch && git rebase -i origin/master
 	sla = log --oneline --decorate --graph --all
+  names = show --name-only
 	uncommit = reset --soft HEAD^
 	unstage = reset
   take = "!f() { git co -b awortham/$1; }; f"
   reorient = "!f() { git push origin +master:$1 && git reset --hard origin/$1 ; }; f"
 [push]
-  default = current
+	default = current
 [credential]
 	helper = osxkeychain
 [rebase]
 	autosquash = true
 	instructionFormat = (%an <%ae>) %s
+[merge]
+  no-edit = true
+[pull]
+	default = current
