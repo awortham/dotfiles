@@ -1,0 +1,79 @@
+box restart
+tmux has-session -t accounts
+if [ $? != 0 ]
+then
+  tmux new-session -s accounts -n editor -d
+  tmux send-keys -t accounts 'cd ~/Code/accounts' C-m
+  tmux send-keys -t accounts 'vim' C-m
+  tmux split-window -h -p 35 -t accounts
+  tmux send-keys -t accounts 'cd ~/Code/accounts' C-m
+  tmux new-window -n background -t accounts
+  tmux send-keys -t accounts:1 'cd ~/Code/accounts' C-m
+  tmux send-keys -t accounts:1 'server' C-m
+  tmux select-window -t accounts:0
+  echo 'accounts session set up'
+fi
+
+tmux has-session -t exercism
+if [ $? != 0 ]
+then
+  tmux new-session -s exercism -n editor -d
+  tmux send-keys -t exercism 'cd ~/Exercism/teams/tanron' C-m
+  tmux split-window -h -p 35 -t exercism
+  tmux send-keys -t exercism 'cd ~/Exercism/teams/tanron' C-m
+fi
+
+tmux has-session -t pco-api
+if [ $? != 0 ]
+then
+  tmux new-session -s pco-api -n editor -d
+  tmux send-keys -t pco-api 'cd ~/Code/pco-api' C-m
+  tmux send-keys -t pco-api 'vim' C-m
+  tmux split-window -h -p 35 -t pco-api
+  tmux send-keys -t pco-api 'cd ~/Code/pco-api' C-m
+fi
+
+tmux has-session -t people
+if [ $? != 0 ]
+then
+  . cdpeeps
+  tmux new-session -s people -n editor -d
+  tmux send-keys -t people 'cd ~/Code/people' C-m
+  tmux send-keys -t people 'vim' C-m
+  tmux split-window -h -p 35 -t people
+  tmux send-keys -t people 'cd ~/Code/people' C-m
+  tmux new-window -n background -t people
+  tmux send-keys -t people:1 'cd ~/Code/people' C-m
+  tmux send-keys -t people:1 'server'
+  tmux split-window -h -t people:1
+  tmux send-keys -t people:1 'foreman start'
+  tmux split-window -v -t people:1
+  tmux send-keys -t people:1 'yarn start'
+  tmux select-window -t people:0
+fi
+
+tmux has-session -t services
+if [ $? != 0 ]
+then
+  tmux new-session -s services -n editor -d
+  tmux send-keys -t services 'cd ~/Code/services' C-m
+  tmux send-keys -t services 'vim' C-m
+  tmux split-window -h -p 35 -t services
+  tmux send-keys -t services 'cd ~/Code/services' C-m
+  tmux new-window -n background -t services
+  tmux send-keys -t services:1 'cd ~/Code/services' C-m
+  tmux send-keys -t services:1 'server' C-m
+  tmux split-window -h -t services:1
+  tmux send-keys -t services 'cd ~/Code/services' C-m
+  tmux send-keys -t services:1 'bundle exec sidekiq' C-m
+  tmux split-window -v -t services:1
+  tmux send-keys -t services 'cd ~/Code/services' C-m
+  tmux send-keys -t services:1 'yarn start'
+  tmux select-window -t services:0
+  tmux attach -t services
+fi
+
+if [ $? == 0 ]
+  then
+    tmux attach -t services
+  fi
