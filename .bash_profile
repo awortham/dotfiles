@@ -1,16 +1,13 @@
 export CLICOLOR=1 export LSCOLORS=GxFxCxDxBxegedabagaced
-export EDITOR=/usr/bin/vim
+export EDITOR=nvim
 
 ### aliases
-alias barn="bundle && yarn"
-alias cdb="cd ~/Code"
+alias barn="bundle && yarn install --check-files"
 alias cdp="cd ~/Documents/personal"
-alias code="cd ~/Code"
-alias cdpeeps="cd ~/Code/people"
-alias cdservs="cs ~/Code/people"
 alias cdquix="cd ~/Documents/personal/personal/quiX-schedule/"
 alias cop="rubocop"
 alias cp="cp -v"
+alias gdbranches="git branch | grep -v 'master' | grep -v 'staging' | xargs git branch -D "
 alias dotfiles="cd ~/dotfiles"
 alias odots="vim ~/dotfiles"
 alias fixdb="rake db:drop db:create db:migrate db:seed"
@@ -27,22 +24,17 @@ alias obash="vim ~/.bash_profile"
 alias ogit="vim ~/.gitconfig"
 alias okit="vim ~/.config/kitty/kitty.conf"
 alias omux="vim ~/.tmux.conf"
+alias opry="vim ~/.pryrc"
 alias overview="open 'https://github.com/awortham?tab=overview&from="$(date '+%Y-%m-%d')"'"
-alias ovim="vim ~/.vimrc"
-alias pc="pco console"
-alias pd="pco deploy"
-alias pdp="pco deploy production"
-alias pd="pco deploy"
-alias pdp="pco deploy production"
+alias ovim="vim ~/.config/nvim/init.vim"
+alias ozsh="vim ~/.zshrc"
 alias rc="rails c"
 alias rebash="source ~/.bash_profile && echo 'Your bash profile has been reloaded'"
 alias rm="rm -v"
 alias rn-ios="react-native run-ios"
 alias rr="bundle exec rake routes"
 alias rs="rails s"
-alias rserver="box restart-app"
 alias server="tail -f log/development.log"
-alias setup="~/pco-development"
 alias usezsh="chsh -s /bin/zsh"
 alias usebash="chsh -s /bin/bash"
 alias shell="echo $SHELL"
@@ -65,10 +57,6 @@ muxa() {
 symlinkDotfiles() {
   ln -sv dotfiles/$1 $1
 }
-
-### rundeck
-export RUNDECK_BROWSERIFY="true"
-export RUNDECK_API_TOKEN="5cvZeJ2UXxwq2cXUNWVsfR41fNJeO6X4"
 
 ### bash completion
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
@@ -132,35 +120,30 @@ function gg() {
   open $URL
 }
 
+### list all pull requests regradless of repo
+function lpr() {
+  open "https://github.com/pulls"
+}
+
 ### list pull requests by repo
-function lppr() {
+function lcpr() {
   # USER=$(cat .git/config | grep github | sed -E 's/^.*(github\.com):(.*)\/(.*)\.git?/\2/')
   # open "https://github.com/pulls?utf8=%E2%9C%93&q=is%3Aopen+is%3Apr+user%3A$USER"
-  open "https://github.com/ministrycentered/people/pulls/awortham"
+  open "https://github.com/detaso/connect/pulls/awortham"
 }
 
-function lrpr() {
-  open "https://github.com/ministrycentered/registrations/pulls/awortham"
+function lwpr() {
+  open "https://github.com/detaso/web/pulls/awortham"
 }
 
-function lspr() {
-  open "https://github.com/ministrycentered/services/pulls/awortham"
+### list all my branches by repo
+function lcb() {
+  open "https://github.com/detaso/connect/branches/yours"
 }
 
-function lapr {
-  open "https://github.com/ministrycentered/accounts/pulls/awortham"
+function ocov() {
+  open "file:///Users/aaronwortham/detaso/web/coverage/index.html#_AllFiles"
 }
-
-### list all my branches on people
-function lpb() {
-  open "https://github.com/ministrycentered/people/branches/yours"
-}
-
-### list all my checkins pull requests
-function lcpr() {
-  open "https://github.com/ministrycentered/check-ins/pulls/awortham"
-}
-
 
 ### This allows you to fire up a Rails server and then connect via your phone.
 ### You must be on the same wifi as the computer is on.
@@ -183,8 +166,6 @@ fi
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
-eval "$(~/Code/pco/bin/pco init -)"
-
 ### Add yarn modules to the global path
 export PATH="$PATH:$(yarn global bin)"
 export PATH="$PATH:$(npm bin)"
@@ -204,20 +185,18 @@ name() {
   else
     echo "branch"
   fi
-
-  # if [ $branch == *"awortham"* ] && [ $branch != "master" ] && [ $branch != "staging" ]; then
-  #   echo "branch includes name and is not master or staging"
-  # else
-  #   echo "branch does not include name"
-  # fi
 }
 
-ssh-add ~/.ssh/pco_servers
+list_colors() {
+  for i in {0..255}; do
+    printf "\x1b[38;5;${i}mcolour${i}\x1b[0m\n"
+  done
+}
+
 export RBENV_ROOT=$HOME/.rbenv
 export MYSQL_PORT_3306_TCP_ADDR=127.0.0.1
 export MYSQL_SLAVE_PORT_3306_TCP_ADDR=127.0.0.1
 export MYSQL_SLAVE_PORT_3306_TCP_PORT=3307
-export PATH=/Users/aaronwortham/pco-box/bin:/usr/local/bin:$PATH
 eval "$(rbenv init -)"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
@@ -230,6 +209,7 @@ export FZF_DEFAULT_OPTS='
 # export FZF_DEFAULT_COMMAND='ag --nogroup --nocolor --column'
 export FZF_DEFAULT_COMMAND='ag -g ""'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export BAT_THEME="Tomorrow-Night"
 
 export PATH="/usr/local/sbin:$PATH"
 
@@ -237,3 +217,6 @@ export PATH="/usr/local/sbin:$PATH"
 # The original version is saved in .bash_profile.pysave
 PATH="/Library/Frameworks/Python.framework/Versions/3.7/bin:${PATH}"
 export PATH
+# Add Visual Studio Code (code)
+export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"

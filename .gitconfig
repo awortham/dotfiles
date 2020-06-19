@@ -7,24 +7,24 @@
 	email = wortham.aaron@gmail.com
 	name = Aaron Wortham
 [core]
-	editor = /usr/bin/vim
+	editor = nvim
 	excludesfile = /Users/awortham/.gitignore_global
 [alias]
 	aa = add .
 	alias = config --get-regexp alias
 	b = branch
+  caa = commit -a --amend -C HEAD
 	co = checkout
 	d = diff
   db = "!f() { git b -D $1 && git remote prune origin; }; f"
   dbr = branch-delete '$1'
-  dt = checkout db/structure.sql
 	glog = log -E -i --grep
 	last = log -1 HEAD
   lom = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative origin/master..head
   lomin = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative origin/master..head --author='Aaron Wortham'
   mine = log --pretty=format:'%C(yellow)%h%C(reset) - %an [%C(green)%ar%C(reset)] %s' --author='Aaron Wortham'
 	mup = !git checkout master && git pull origin master
-  pr = !hub pull-request -o -l 'Not Ready'
+  pr = !hub pull-request -o -l 'wip'
 	pretty = log --pretty=format:'%C(yellow)%h%C(reset) - %an [%C(green)%ar%C(reset)] %s'
   pu = !git pull origin `git rev-parse --abbrev-ref HEAD`
   rema = !git fetch && git rebase -i origin/master
@@ -32,8 +32,9 @@
   names = show --name-only
 	uncommit = reset --soft HEAD^
 	unstage = reset
-  take = "!f() { git co -b awortham/$1; }; f"
+  take = "!f() { git co -b aw-$1; }; f"
   reorient = "!f() { git push origin +master:$1 && git reset --hard origin/$1 ; }; f"
+  reset-file = "!f() { git checkout origin/master $1; }; f"
 [push]
 	default = current
 [credential]
@@ -45,3 +46,8 @@
   no-edit = true
 [pull]
 	default = current
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
