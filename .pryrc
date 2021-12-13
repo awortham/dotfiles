@@ -1,15 +1,10 @@
-Pry.config.editor = "vim"
+Pry.config.editor = "nvim"
+Pry.config.skip_cruby_source = true
 
-# if Rails
-#   Pry::Commands.block_command "cc", "Clear Cache" do |args|
-#     Rails.cache.clear
-#     puts "Cleared Cache"
-#   end
-
-#   Pry::Commands.block_command "ia", "Alias for 'SaxotechImporter'" do |args|
-#     SaxotechImporter::Importer.import_article(args)
-#   end
-# end
+# Hit Enter to repeat last command
+Pry::Commands.command /^$/, "repeat last command" do
+  pry_instance.run_command Pry.history.to_a.last
+end
 
 if defined?(PryByebug)
   Pry.commands.alias_command "c", "continue"
@@ -20,4 +15,11 @@ end
 
 def dfc
   Detaso::Database.first.connect!
+end
+
+if defined?(Detaso)
+  if Rails.env.development?
+    Current.client = Client.first
+    dfc
+  end
 end

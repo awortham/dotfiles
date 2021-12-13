@@ -43,7 +43,7 @@ alias quix="~/quix-scheduler"
 #tmux aliases
 alias kts='tmux ls | awk '\''{print $1}'\'' | sed '\''s/://g'\'' | xargs -I{} tmux kill-session -t {}'
 alias muxl='tmux list-sessions'
-alias remux="source ~/.tmux.conf && echo 'Your tmux config has been reloaded'"
+alias remux="tmux source-file ~/.tmux.conf && echo 'Your tmux config has been reloaded'"
 
 #tmux attach alias/function
 muxa() {

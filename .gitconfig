@@ -6,9 +6,11 @@
 [user]
 	email = wortham.aaron@gmail.com
 	name = Aaron Wortham
+	signingkey = 6B29E3650E4A18E8
 [core]
 	editor = nvim
 	excludesfile = /Users/awortham/.gitignore_global
+	pager = git-split-diffs --color | less -RFX
 [alias]
 	aa = add .
 	alias = config --get-regexp alias
@@ -20,17 +22,18 @@
   dbr = branch-delete '$1'
 	glog = log -E -i --grep
 	last = log -1 HEAD
-  lom = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative origin/master..head
+  lor = "!f() { git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative ${1:-origin/master}..HEAD; }; f"
   lomin = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative origin/master..head --author='Aaron Wortham'
   mine = log --pretty=format:'%C(yellow)%h%C(reset) - %an [%C(green)%ar%C(reset)] %s' --author='Aaron Wortham'
-	mup = !git checkout master && git pull origin master
-  pr = !hub pull-request -o -l 'wip'
+	mup = !git switch master && git pull origin master
+  pr = !hub pull-request -p -o -f -l 'wip'
 	pretty = log --pretty=format:'%C(yellow)%h%C(reset) - %an [%C(green)%ar%C(reset)] %s'
   pu = !git pull origin `git rev-parse --abbrev-ref HEAD`
   rema = !git fetch && git rebase -i origin/master
 	sla = log --oneline --decorate --graph --all
   names = show --name-only
 	uncommit = reset --soft HEAD^
+  undo = "!f() { git reset --soft HEAD^ && git reset; }; f"
 	unstage = reset
   take = "!f() { git co -b aw-$1; }; f"
   reorient = "!f() { git push origin +master:$1 && git reset --hard origin/$1 ; }; f"
@@ -46,8 +49,13 @@
   no-edit = true
 [pull]
 	default = current
+	rebase = false
 [filter "lfs"]
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
 	clean = git-lfs clean -- %f
+[hub]
+	protocol = ssh
+[commit]
+	gpgsign = true

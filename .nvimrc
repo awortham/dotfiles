@@ -1,64 +1,71 @@
+let g:ruby_host_prog = '~/.rbenv/versions/2.7.4/bin/neovim-ruby-host'
+let g:python2_host_prog='/usr/bin/python2'
 set runtimepath^=~/.runtimepath+=~/.vim/after
 let &path = &runtimepath
 
+let mapleader = ','                       " set <Leader>
 set nocompatible
+
 filetype off
 
   call plug#begin()
   set rtp+=/usr/local/opt/fzf
 
-  Plug 'airblade/vim-gitgutter'
-  Plug 'vim-airline/vim-airline'                " nice looking footer bar
-  Plug 'vim-airline/vim-airline-themes'
-  Plug 'briancollins/vim-jst'             " JST / EJS syntax
-  Plug 'flazz/vim-colorschemes'
-  Plug 'christoomey/vim-sort-motion'
-  Plug 'christoomey/vim-tmux-navigator'   " easy navigation b/w vim & tmux
-  Plug 'darfink/vim-plist'                 " PLIST Syntax Highlighting / indentation
-  Plug 'dense-analysis/ale'
-  Plug 'garbas/vim-snipmate'
-  Plug 'godlygeek/csapprox'               " better gvim color support
-  Plug 'chriskempson/base16-vim'
-  Plug 'kchmck/vim-coffee-script'         " coffeescript syntax & indent
-  Plug 'marcWeber/vim-addon-mw-utils'    " These next three all support tab completion snipmate functionality
-  Plug 'mattn/emmet-vim'                  " emmet stuff for vim [http://emmet.io/]
-  Plug 'mustache/vim-mustache-handlebars' " mustache/handlebars syntax & indent
-  Plug 'nathanaelkane/vim-indent-guides'  " Indent guides to keep your code aligned
-  Plug 'othree/html5.vim'                 " html5 syntax & indent
-  Plug 'pangloss/vim-javascript'          " javascript syntax & indent
-  Plug 'rking/ag.vim'                     " more searching
-  Plug 'janko/vim-test'
-  Plug 'junegunn/fzf', { 'dir': '/usr/local/opt/fzf', 'do': './install --bin' }
-  Plug 'junegunn/fzf.vim'
-  Plug 'ngmy/vim-rubocop'
-  Plug 'rhysd/git-messenger.vim'
-  Plug 'ryanoasis/vim-devicons'           " Dev Icons
+  source ~/.config/nvim/plugins/gitgutter.vim
+  source ~/.config/nvim/plugins/airline.vim
+  source ~/.config/nvim/plugins/jst.vim
+  source ~/.config/nvim/plugins/colorschemes.vim
+  source ~/.config/nvim/plugins/sort_motion.vim
+  source ~/.config/nvim/plugins/tmux_navigator.vim
+  source ~/.config/nvim/plugins/plist.vim
+  source ~/.config/nvim/plugins/ale.vim
+  source ~/.config/nvim/plugins/snipmate.vim
+  source ~/.config/nvim/plugins/csapprox.vim
+  source ~/.config/nvim/plugins/base16.vim
+  source ~/.config/nvim/plugins/highlightedyank.vim
+  source ~/.config/nvim/plugins/addon_mw_utils.vim
+  source ~/.config/nvim/plugins/emmet.vim
+  source ~/.config/nvim/plugins/indent_guides.vim
+  source ~/.config/nvim/plugins/html5.vim
+  source ~/.config/nvim/plugins/javascript.vim
+  source ~/.config/nvim/plugins/ag.vim
+  source ~/.config/nvim/plugins/test.vim
+  source ~/.config/nvim/plugins/fzf.vim
+  source ~/.config/nvim/plugins/rubocop.vim
+  source ~/.config/nvim/plugins/oceanic_next.vim
+  source ~/.config/nvim/plugins/git_messenger.vim
+  " source ~/.config/nvim/plugins/neoformat.vim                                   feature-mobile-mar ✭
   Plug 'sbdchd/neoformat'
-  Plug 'scrooloose/nerdtree'              " file menu
-  Plug 'scrooloose/syntastic'             " syntax checker
+  " source ~/.config/nvim/plugins/nerdtree.vim                                    feature-mobile-mar ✭
+  Plug 'scrooloose/nerdtree'
+  " source ~/.config/nvim/plugins/syntastic.vim                                   feature-mobile-mar ✭
+  Plug 'scrooloose/syntastic'
+  " source ~/.config/nvim/plugins/slim.vim                                        feature-mobile-mar ✭
   Plug 'slim-template/vim-slim'
-  Plug 't9md/vim-ruby-xmpfilter'          " inline ruby completion
+  " source ~/.config/nvim/plugins/ruby_xmpfilter.vim                              feature-mobile-mar ✭
+  Plug 't9md/vim-ruby-xmpfilter'
+  " source ~/.config/nvim/plugins/exchange.vim                                    feature-mobile-mar ✭
   Plug 'tommcdo/vim-exchange'
-  Plug 'tomtom/tlib_vim'
-  Plug 'tpope/vim-commentary'             " easily use comments
-  Plug 'tpope/vim-endwise'                " auto end addition in ruby
-  Plug 'tpope/vim-fugitive'              " git interaction from within vim
-  Plug 'tpope/vim-haml'                   " haml syntax & indent
-  Plug 'tpope/vim-markdown'               " markdown syntax & indent
-  Plug 'tpope/vim-rails'
-  Plug 'tpope/vim-repeat'                " Allows plugins to repeat
-  Plug 'tpope/vim-sensible'
-  Plug 'tpope/vim-surround'
-  Plug 'tpope/vim-unimpaired'            " Allows for adding new lines above and below your current line and switching lines
-  Plug 'cyphactor/vim-open-alternate'
-  Plug 'vim-ruby/vim-ruby'                " ruby syntax & indent
-  Plug 'wesQ3/vim-windowswap'             " window swapping
-  Plug 'maxmellon/vim-jsx-pretty'
-
-  "- forked this, made some mods and pulling from my own repo
-  Plug 'awortham/vim-snippets'
+  source ~/.config/nvim/plugins/tlib.vim
+  source ~/.config/nvim/plugins/commentary.vim
+  source ~/.config/nvim/plugins/endwise.vim
+  source ~/.config/nvim/plugins/fugitive.vim
+  source ~/.config/nvim/plugins/haml.vim
+  source ~/.config/nvim/plugins/rails.vim
+  source ~/.config/nvim/plugins/repeat.vim
+  source ~/.config/nvim/plugins/sensible.vim
+  source ~/.config/nvim/plugins/surround.vim
+  source ~/.config/nvim/plugins/unimpaired.vim
+  source ~/.config/nvim/plugins/open_alternate.vim
+  source ~/.config/nvim/plugins/ruby.vim
+  source ~/.config/nvim/plugins/windowswap.vim
+  source ~/.config/nvim/plugins/jsx_pretty.vim
+  source ~/.config/nvim/plugins/devicons.vim
+  source ~/.config/nvim/plugins/snippets.vim
 
   call plug#end()
+
+  source ~/.config/nvim/start_key.vim
 
   filetype plugin indent on
 
@@ -72,6 +79,9 @@ filetype off
 
   set synmaxcol=400            " no syntax highlighting for lines longer than 200 cols
   let g:vim_jsx_pretty_colorful_config = 1 " default 0
+
+  " Set version to new version to remove deprecation error
+  let g:snipMate = { 'snippet_version' : 1 }
 
   set number                   " display line numbers
   set relativenumber
@@ -142,12 +152,13 @@ filetype off
   autocmd FileType eruby setlocal indentkeys-=*<Return>
 
   " linting
-  let g:ale_linters = {'ruby': ['standardrb']}
-  let g:ale_fixers = {'ruby': ['standardrb']}
+  let g:ale_linters = {'ruby': ['standardrb'], 'javascript': ['prettier']}
+  let g:ale_fixers = {'ruby': ['standardrb'], 'javascript': ['eslint']}
   let g:ale_lint_on_text_changed = 'never'
   let g:ale_lint_on_insert_leave = 0
   let g:ale_lint_on_enter = 0
-  let g:ale_fix_on_save = 1
+  let g:ale_lint_on_save = 1
+  let g:ale_fix_on_save = 0
   let g:ruby_indent_assignment_style = 'variable'
 
   " prettier setup
@@ -170,10 +181,12 @@ filetype off
     set termguicolors
   endif
 
-  let g:airline_theme='tomorrow'
+  " let g:airline_theme='tomorrow'
+  let g:airline_theme='oceanicnext'
 
   syntax enable
-  colorscheme base16-tomorrow-night-eighties
+  " colorscheme base16-tomorrow-night-eighties
+  colorscheme OceanicNext
 
   "" I would like to change the blue in this theme to this blue
   " set rubyInclude=#81a2b3
@@ -192,6 +205,7 @@ filetype off
 
   highlight ErrorMsg guibg=#6699cc
   hi CursorLineNr guifg=#6699cc
+  hi rubyInterpolation guifg=#c0c5ce
 
   "- Git Gutter" These settings must be below the base16colorspace setting
   set updatetime=100
@@ -200,11 +214,44 @@ filetype off
   highlight GitGutterChange guifg=#f0c674
   highlight GitGutterDelete guifg=#cc6666
 
-  "- Git messenger
-  nmap <Leader>m <Plug>(git-messenger)
-
   "- Git Commit
   autocmd Filetype gitcommit set colorcolumn=50,72
+  autocmd FileType gitcommit set textwidth=72
+
+  autocmd VimEnter COMMIT_EDITMSG call OpenCommitMessageDiff()
+  function OpenCommitMessageDiff()
+    " Save the contents of the z register
+    let old_z = getreg("z")
+    let old_z_type = getregtype("z")
+
+    try
+      call cursor(1, 0)
+      let diff_start = search("^diff --git")
+      if diff_start == 0
+        " There's no diff in the commit message; generate our own.
+        let @z = system("git diff --cached -M -C")
+      else
+        " Yank diff from the bottom of the commit message into the z register
+        :.,$yank z
+        call cursor(1, 0)
+      endif
+
+      " Paste into a new buffer
+      vnew
+      normal! V"zP
+    finally
+      " Restore the z register
+      call setreg("z", old_z, old_z_type)
+    endtry
+
+    " Configure the buffer
+    set filetype=diff noswapfile nomodified readonly
+    silent file [Changes\ to\ be\ committed]
+
+    " Get back to the commit message
+    wincmd p
+  endfunction
+
   "- Searching ------------------------------------------------------------------------------------
 
   let &colorcolumn=join(range(81,999),",")
@@ -224,8 +271,26 @@ filetype off
 
   "- Keys ===========================================================================================
 
-  let mapleader = ','                       " set <Leader>
   set backspace=indent,eol,start            " make backspace behave as expected
+
+  " nmap <silent> <leader>s :TestNearest<CR>
+  " nmap <silent> <leader>t :TestFile<CR>
+  " nmap <silent> <leader>a :TestSuite<CR>
+  " nmap <silent> <CR> :TestLast<CR>
+  " nmap <silent> <leader>g :TestVisit<CR>
+  " let test#strategy = "neovim"
+  " let test#ruby#use_binstubs = 1
+  " let test#ruby#use_spring_binstub = 1
+  " let g:test#preserve_screen = 1
+
+  "- Git messenger
+  nmap <Leader>m <Plug>(git-messenger)
+
+  "-open current file in new tab
+  nnoremap <Leader>T :tabnew %<Return>
+
+  " Hotkey for adding 'Co-authored-by:' for GitHub
+  map <Leader>gco iCo-authored-by: asdf <asdf@asdf.com><esc>7b
 
   "- easy splits and switches over (\v)
   nnoremap <leader>v <C-w>v<C-w><C-w>
@@ -272,27 +337,14 @@ filetype off
   nnoremap <C-k><C-b> :NERDTreeToggle<CR>
   let NERDTreeShowHidden=1    " show hidden files
   let NERDTreeQuitOnOpen = 1  " Hide NERDTree when opening a file
+  let g:NERDTreeWinSize=60
+  nmap <leader>f :NERDTreeFind<cr>
 
   "- JSX ------------------------------------------------------------------------------------
   let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 
   "- Custom ignore paths
   set wildignore+=*/tmp/*,*/bin/*,*/bower_components/*,*.so,*.swp,*.zip     " MacOSX/Linux
-
-  "- vim-test
-  nmap <silent> <leader>s :TestNearest<CR>
-  nmap <silent> <leader>t :TestFile<CR>
-  nmap <silent> <leader>a :TestSuite<CR>
-  nmap <silent> <CR> :TestLast<CR>
-  nmap <silent> <leader>g :TestVisit<CR>
-  let test#strategy = "neovim"
-  let test#ruby#use_binstubs = 1
-  let test#ruby#use_spring_binstub = 1
-  let g:test#preserve_screen = 1
-
-  "- Rubocop set the correct file to use
-  let g:vimrubocop_config = '~/.rubocop.yml'
-  map <Leader>z :RuboCop<CR>
 
   "- XMPFilter  ------------------------------------------------------------------------------------
   map <C-b> <Plug>(xmpfilter-mark)<Plug>(xmpfilter-run)
@@ -305,9 +357,6 @@ filetype off
   "- Airline ========================================================================================
   let g:airline_powerline_fonts = 1
 
-  "- Git Commands ===============================
-  nnoremap <Leader>g :Git<CR>
-
   "- ES6---------------------------------------------------------------------------------------
   autocmd BufRead,BufNewFile *.es6 setfiletype javascript
 
@@ -318,36 +367,9 @@ filetype off
   "- J Builder ------------------------------------------------------------------------------------
   au BufNewFile,BufRead *.json.jbuilder set ft=ruby       " set syntax to ruby for jBuilder files
 
-  "- For running commands in a new window ========================================================
-  function! s:ExecuteInShell(command)
-    let command = join(map(split(a:command), 'expand(v:val)'))
-    let winnr = bufwinnr('^' . command . '$')
-    silent! execute  winnr < 0 ? 'botright new ' . fnameescape(command) : winnr . 'wincmd w'
-    setlocal buftype=nowrite bufhidden=wipe nobuflisted noswapfile nowrap number
-    echo 'Execute ' . command . '...'
-    silent! execute 'silent %!'. command
-    silent! execute 'resize ' . line('$')
-    silent! redraw
-    silent! execute 'au BufUnload <buffer> execute bufwinnr(' . bufnr('#') . ') . ''wincmd w'''
-    silent! execute 'nnoremap <silent> <buffer> <LocalLeader>r :call <SID>ExecuteInShell(''' . command . ''')<CR>'
-    echo 'Shell command ' . command . ' executed.'
-    wincmd k
-  endfunction
-  command! -complete=shellcmd -nargs=+ Shell call s:ExecuteInShell(<q-args>)
-
-  "- FZF =========================================================================
-  let g:fzf_buffers_jump = 1
-
-  "- Open FZF
-  noremap <C-p> :Files<CR>
-
-  "- Default fzf layout
-  "- down / up / left / right
-  let g:fzf_layout = { 'down': '~30%' }
-
-  nmap <silent> <leader>w :exec 'silent !google-chrome % &'
-
   "- Press Function and then F3 while the cursor is over an attribute - it'll list out the
   "- attribute name and the color for highlight adjustments
-  map <F3> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">" . " FG:" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"fg#")<CR>
+  map <F5> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">" . " FG:" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"fg#")<CR>
+
+  nnoremap <leader>l :ALEFix<cr>:w<cr>
 
