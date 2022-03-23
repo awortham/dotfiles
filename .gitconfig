@@ -38,6 +38,7 @@
   take = "!f() { git co -b aw-$1; }; f"
   reorient = "!f() { git push origin +master:$1 && git reset --hard origin/$1 ; }; f"
   reset-file = "!f() { git checkout origin/master $1; }; f"
+  wip = commit -am 'WIP'
 [push]
 	default = current
 [credential]
