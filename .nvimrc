@@ -1,4 +1,4 @@
-let g:ruby_host_prog = '~/.rbenv/versions/2.7.4/bin/neovim-ruby-host'
+let g:ruby_host_prog = '~/.rbenv/versions/2.7.5/bin/neovim-ruby-host'
 let g:python2_host_prog='/usr/bin/python2'
 set runtimepath^=~/.runtimepath+=~/.vim/after
 let &path = &runtimepath
@@ -21,8 +21,10 @@ set scrolloff=3
 set sidescrolloff=6
 set mouse=a
 set clipboard=unnamed
+
 set nofoldenable
-set nowrap
+
+set wrap
 set linebreak
 set formatoptions-=t
 set wrapmargin=0
@@ -82,7 +84,6 @@ filetype off
   source ~/.config/nvim/plugins/git_messenger.vim
   source ~/.config/nvim/plugins/neoformat.vim
   source ~/.config/nvim/plugins/nerdtree.vim
-  source ~/.config/nvim/plugins/syntastic.vim
   source ~/.config/nvim/plugins/slim.vim
   source ~/.config/nvim/plugins/ruby_xmpfilter.vim
   source ~/.config/nvim/plugins/exchange.vim
@@ -123,8 +124,6 @@ filetype off
   autocmd FileType html setlocal indentkeys-=*<Return>
   autocmd FileType html.handlebars setlocal indentkeys-=*<Return>
   autocmd FileType eruby setlocal indentkeys-=*<Return>
-
-  let &colorcolumn=join(range(81,999),",")
 
   autocmd BufWritePre * :%s/\s\+$//e " auto strip whitespace on save
 

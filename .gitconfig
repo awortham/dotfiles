@@ -22,22 +22,22 @@
   dbr = branch-delete '$1'
 	glog = log -E -i --grep
 	last = log -1 HEAD
-  lor = "!f() { git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative ${1:-origin/master}..HEAD; }; f"
-  lomin = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative origin/master..head --author='Aaron Wortham'
+  lor = "!f() { git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative ${1:-origin/main}..HEAD; }; f"
+  lomin = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative origin/main..head --author='Aaron Wortham'
   mine = log --pretty=format:'%C(yellow)%h%C(reset) - %an [%C(green)%ar%C(reset)] %s' --author='Aaron Wortham'
-	mup = !git switch master && git pull origin master
+	mup = !git switch main && git pull origin main
   pr = !hub pull-request -p -o -f -l 'wip'
 	pretty = log --pretty=format:'%C(yellow)%h%C(reset) - %an [%C(green)%ar%C(reset)] %s'
   pu = !git pull origin `git rev-parse --abbrev-ref HEAD`
-  rema = !git fetch && git rebase -i origin/master
+  rema = !git fetch && git rebase -i origin/main
 	sla = log --oneline --decorate --graph --all
   names = show --name-only
 	uncommit = reset --soft HEAD^
   undo = "!f() { git reset --soft HEAD^ && git reset; }; f"
 	unstage = reset
   take = "!f() { git co -b aw-$1; }; f"
-  reorient = "!f() { git push origin +master:$1 && git reset --hard origin/$1 ; }; f"
-  reset-file = "!f() { git checkout origin/master $1; }; f"
+  reorient = "!f() { git push origin +main:$1 && git reset --hard origin/$1 ; }; f"
+  reset-file = "!f() { git checkout origin/main $1; }; f"
   wip = commit -am 'WIP'
 [push]
 	default = current

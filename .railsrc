@@ -1,5 +1,4 @@
---database=mysql
---skip-turbolinks
+--database=postgresql
+--css=tailwind
 --skip-test-unit
---skip-bundle
 environment "config.generators {|g| g.helper false\n g.assets false\n end}"
