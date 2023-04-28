@@ -61,6 +61,7 @@ filetype off
   call plug#begin()
   set rtp+=/usr/local/opt/fzf
 
+  source ~/.config/nvim/plugins/copilot.vim
   source ~/.config/nvim/plugins/gitgutter.vim
   source ~/.config/nvim/plugins/jst.vim
   source ~/.config/nvim/plugins/colorschemes.vim
