@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# if ! command -v brew >/dev/null; then
+#   echo "You must have homebrew installed!"
+#   exit 1
+# fi
+
+if [[ "$(echo "${BASH_VERSION}" | cut -d '.' -f 1)" != "5" ]]; then
+  echo 'You need to first install bash 5.x.'
+  echo 'You can do this with: `brew install bash`'
+  echo "Then rerun this script."
+  exit 1
+fi
+
+DEFAULT_CONFIG_PREFIX="install"
+CONFIG_SUFFIX=".conf.yaml"
+DOTBOT_DIR="dotbot"
+
+DOTBOT_BIN="bin/dotbot"
+BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+set +e
+config="$(git config --get-all url.https://github.com/.insteadOf)"
+read -r -d '' expected_config <<'EOF'
+git@github.com:
+ssh://git@github.com/
+http://github.com/
+EOF
+set -e
+
+if [[ "$config" != "$expected_config" ]]; then
+  git config --global --replace-all url."https://github.com/".insteadOf git@github.com:
+  git config --global --add url."https://github.com/".insteadOf ssh://git@github.com/
+  git config --global --add url."https://github.com/".insteadOf http://github.com/
+fi
+
+cd "${BASEDIR}"
+git submodule sync --recursive
+git submodule update --init --recursive "${DOTBOT_DIR}"
+git submodule update --init --recursive
+
+shopt -s nullglob
+plugin_dirs=(plugins/*)
+shopt -u nullglob
+
+plugins=()
+for plugin_dir in ${plugin_dirs[@]}; do
+  plugins+=("--plugin-dir" ${plugin_dir})
+done
+
+for conf in ${DEFAULT_CONFIG_PREFIX}; do
+  "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" \
+    "${plugins[@]}" \
+    -c "${conf}${CONFIG_SUFFIX}" "${@}"
+done
