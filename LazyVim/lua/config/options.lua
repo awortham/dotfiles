@@ -7,4 +7,3 @@ vim.api.nvim_set_keymap("i", "jj", "<ESC>", { noremap = true })
 vim.api.nvim_set_keymap("n", "<Leader>gco", "iCo-authored-by: asdf <asdf@asdf.com><ESC>7b", { noremap = true })
 vim.api.nvim_set_keymap("n", "<Leader>v", "<C-w>v<C-w><C-w>", {})
 vim.api.nvim_set_keymap("n", "<Leader>h", "<C-w>s<C-w><C-w>", {})
---
