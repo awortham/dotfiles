@@ -26,7 +26,7 @@
   lomin = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative origin/main..head --author='Aaron Wortham'
   mine = log --pretty=format:'%C(yellow)%h%C(reset) - %an [%C(green)%ar%C(reset)] %s' --author='Aaron Wortham'
 	mup = !git switch main && git pull origin main
-  pr = !hub pull-request -p -o -f -l 'wip'
+  pr = !git push && gh pr create --label 'wip' --web --assignee '@me'
 	pretty = log --pretty=format:'%C(yellow)%h%C(reset) - %an [%C(green)%ar%C(reset)] %s'
   pu = !git pull origin `git rev-parse --abbrev-ref HEAD`
   rema = !git fetch && git rebase -i origin/main
@@ -41,8 +41,6 @@
   wip = commit -am 'WIP'
 [push]
 	default = current
-[credential]
-	helper = osxkeychain
 [rebase]
 	autosquash = true
 	instructionFormat = (%an <%ae>) %s
@@ -64,3 +62,6 @@
 	insteadOf = git@github.com:
 	insteadOf = ssh://git@github.com/
 	insteadOf = http://github.com/
+[credential]
+  helper =
+  helper = !$(brew --prefix)/bin/gh auth git-credential

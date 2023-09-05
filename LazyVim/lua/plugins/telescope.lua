@@ -13,7 +13,7 @@ return {
           desc = "Find Files (root dir)",
         },
         {
-          "<leader>fc",
+          "<leader>gco",
           function()
             return require("telescope").extensions.githubcoauthors.coauthors()
           end,
