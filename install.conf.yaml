@@ -6,6 +6,15 @@
     ~/.config/nvim/plugins:
       path: plugins
       force: true
+    ~/.config/nvim/init.vim:
+      path: .zshrc
+      force: true
+    ~/.config/nvim/theme.vim:
+      path: theme.vim
+      force: true
+    ~/.config/nvim/start_key.vim:
+      path: start_key.vim
+      force: true
     ~/.config/LazyVim: LazyVim
     #zsh/prezto setup
     ~/.zprezto: prezto
