@@ -4,3 +4,11 @@
       relink: true
 - link:
     ~/.config/LazyVim: LazyVim
+    #zsh/prezto setup
+    ~/.zprezto: prezto
+    ~/.zlogin: prezto/runcoms/zlogin
+    ~/.zlogout: prezto/runcoms/zlogout
+    ~/.zpreztorc: prezto/runcoms/zpreztorc
+    ~/.zprofile: prezto/runcoms/zprofile
+    ~/.zshenv: prezto/runcoms/zshenv
+    ~/.zshrc: prezto/runcoms/zshrc
