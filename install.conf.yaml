@@ -7,7 +7,7 @@
       path: plugins
       force: true
     ~/.config/nvim/init.vim:
-      path: .zshrc
+      path: .nvimrc
       force: true
     ~/.config/nvim/theme.vim:
       path: theme.vim
