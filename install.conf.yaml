@@ -2,9 +2,10 @@
     link:
       create: true
       relink: true
-- shell:
-  - command: rm prezto/runcoms/zshrc
 - link:
+    ~/.config/nvim/plugins:
+      path: plugins
+      force: true
     ~/.config/LazyVim: LazyVim
     #zsh/prezto setup
     ~/.zprezto: prezto
@@ -13,5 +14,7 @@
     ~/.zpreztorc: prezto/runcoms/zpreztorc
     ~/.zprofile: prezto/runcoms/zprofile
     ~/.zshenv: prezto/runcoms/zshenv
-    prezto/runcoms/zshrc: ~/dotfiles/.zshrc
+    prezto/runcoms/zshrc:
+      path: ~/dotfiles/.zshrc
+      force: true
     ~/.zshrc: prezto/runcoms/zshrc
