@@ -3,6 +3,8 @@
       create: true
       relink: true
 - link:
+    ~/.tmux.conf: .tmux.conf
+    #vim setup
     ~/.config/nvim/plugins:
       path: plugins
       force: true
