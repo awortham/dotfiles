@@ -20,6 +20,7 @@
 	d = diff
   db = "!f() { git b -D $1 && git remote prune origin; }; f"
   dbr = branch-delete '$1'
+  dun = clean -f -d
 	glog = log -E -i --grep
 	last = log -1 HEAD
   lor = "!f() { git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative ${1:-origin/main}..HEAD; }; f"

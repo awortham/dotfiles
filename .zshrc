@@ -1,5 +1,5 @@
 #
-# Executes commands at the start of an interactive session.
+# executes commands at the start of an interactive session.
 #
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
@@ -16,6 +16,7 @@ unsetopt nomatch
 export CLICOLOR=1 export LSCOLORS=GxFxCxDxBxegedabagaced
 export BUNDLER_EDITOR=nvim
 export EDITOR=nvim
+export VISUAL=nvim
 
 ### aliases
 alias barn="bundle && yarn install --check-files"
@@ -230,12 +231,10 @@ export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
 
 # app specific aliases
 alias nvim-lazy="NVIM_APPNAME=LazyVim nvim"
-alias nvim-kick="NVIM_APPNAME=kickstart nvim"
-alias nvim-chad="NVIM_APPNAME=NvChad nvim"
-alias nvim-astro="NVIM_APPNAME=AstroNvim nvim"
+alias nvim-scratch="NVIM_APPNAME=ScratchVim nvim"
 
 function nvims() {
-  items=("default" "LazyVim")
+  items=("default" "LazyVim" "ScratchVim")
   config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=50% --layout=reverse --border --exit-0)
   if [[ -z $config ]]; then
     echo "Nothing selected"
@@ -256,6 +255,10 @@ if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
 fi
 # End Nix
 
+function lastimg() {
+  open tmp/capybara/screenshots/$1/$(ls -t tmp/capybara/screenshots/$1 | head -n 1)
+}
+
 export DIRENV_LOG_FORMAT=
 eval "$(direnv hook zsh)"
 
@@ -263,3 +266,5 @@ eval "$(direnv hook zsh)"
 # eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib=$HOME/perl5)"
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 export PATH="/usr/local/opt/libpq/bin:$PATH"
+
+eval "$(ssh-add --apple-load-keychain)"
