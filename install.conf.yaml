@@ -20,6 +20,8 @@
       path: start_key.vim
       force: true
     ~/.config/LazyVim: LazyVim
+    # new from scratch vim setup
+    ~/.config/ScratchVim: ScratchVim
     #zsh/prezto setup
     ~/.zprezto: prezto
     ~/.zlogin: prezto/runcoms/zlogin
