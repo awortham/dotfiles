@@ -1,3 +1,5 @@
+local keymap = vim.keymap
+
 return {
   "nvim-neo-tree/neo-tree.nvim",
   branch = "v3.x",
@@ -8,6 +10,17 @@ return {
   },
 
   config = function()
-    vim.keymap.set('n', '<leader>e', ':Neotree filesystem reveal left<CR>')
+    keymap.set("n", "<leader>e", ":Neotree filesystem reveal toggle left<CR>");
+
+    require("neo-tree").setup({
+      event_handlers = {
+        {
+          event = "file_opened",
+          handler = function()
+            require("neo-tree").close_all()
+          end,
+        },
+      }
+    })
   end
 }
