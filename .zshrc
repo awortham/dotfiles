@@ -14,9 +14,9 @@ unsetopt nomatch
 
 # Customize to your needs...
 export CLICOLOR=1 export LSCOLORS=GxFxCxDxBxegedabagaced
-export BUNDLER_EDITOR=nvim
-export EDITOR=nvim
-export VISUAL=nvim
+export BUNDLER_EDITOR=nvim-scratch
+export EDITOR=nvim-scratch
+export VISUAL=nvim-scratch
 
 ### aliases
 alias barn="bundle && yarn install --check-files"
@@ -41,7 +41,7 @@ alias hosts="sudo vim /etc/hosts"
 alias list_psql="ps -ef | grep postgres"
 alias list="ps -ef"
 alias krs="kill -9 $(lsof -i tcp:3000 -t)"
-alias vim="nvim"
+alias vim="nvim-scratch"
 alias mv="mv -v"
 alias obat="vim ~/.config/bat/config"
 alias obash="vim ~/.bash_profile"
