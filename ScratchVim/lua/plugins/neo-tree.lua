@@ -12,6 +12,7 @@ return {
   config = function()
     keymap.set("n", "<leader>e", ":Neotree filesystem reveal toggle left<CR>");
 
+    -- I'd like to figure out how to get a more full path to files when moving them in the tree
     require("neo-tree").setup({
       event_handlers = {
         {
