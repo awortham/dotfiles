@@ -6,22 +6,8 @@
     ~/.railsrc: .railsrc
     ~/.pryrc: .pryrc
     ~/.tmux.conf: .tmux.conf
-    #vim setup
-    ~/.config/nvim/plugins:
-      path: plugins
-      force: true
-    ~/.config/nvim/init.vim:
-      path: .nvimrc
-      force: true
-    ~/.config/nvim/theme.vim:
-      path: theme.vim
-      force: true
-    ~/.config/nvim/start_key.vim:
-      path: start_key.vim
-      force: true
-    ~/.config/LazyVim: LazyVim
-    # new from scratch vim setup
-    ~/.config/ScratchVim: ScratchVim
+    ~/.config/nvim:
+      path: nvim
     #zsh/prezto setup
     ~/.zprezto: prezto
     ~/.zlogin: prezto/runcoms/zlogin
