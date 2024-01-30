@@ -8,6 +8,23 @@
     ~/.tmux.conf: .tmux.conf
     ~/.config/nvim:
       path: nvim
+      force: true
+    ##vim setup
+    #~/.config/nvim/plugins:
+    #  path: plugins
+    #  force: true
+    #~/.config/nvim/init.vim:
+    #  path: .nvimrc
+    #  force: true
+    #~/.config/nvim/theme.vim:
+    #  path: theme.vim
+    #  force: true
+    #~/.config/nvim/start_key.vim:
+    #  path: start_key.vim
+    #  force: true
+    #~/.config/LazyVim: LazyVim
+    ## new from scratch vim setup
+    #~/.config/ScratchVim: ScratchVim
     #zsh/prezto setup
     ~/.zprezto: prezto
     ~/.zlogin: prezto/runcoms/zlogin

@@ -14,9 +14,9 @@ unsetopt nomatch
 
 # Customize to your needs...
 export CLICOLOR=1 export LSCOLORS=GxFxCxDxBxegedabagaced
-export BUNDLER_EDITOR=nvim-scratch
-export EDITOR=nvim-scratch
-export VISUAL=nvim-scratch
+export BUNDLER_EDITOR=nvim
+export EDITOR=nvim
+export VISUAL=nvim
 
 ### aliases
 alias barn="bundle && yarn install --check-files"
@@ -43,14 +43,14 @@ alias list="ps -ef"
 alias krs="kill -9 $(lsof -i tcp:3000 -t)"
 alias vim="nvim"
 alias mv="mv -v"
-alias obat="vim ~/.config/bat/config"
+alias obat="nvim ~/.config/bat/config"
 alias obash="vim ~/.bash_profile"
-alias ogit="vim ~/.gitconfig"
-alias okit="vim ~/.config/kitty/kitty.conf"
-alias omux="vim ~/.tmux.conf"
-alias opry="vim ~/.pryrc"
+alias ogit="nvim ~/.gitconfig"
+alias okit="nvim ~/.config/kitty/kitty.conf"
+alias omux="nvim ~/.tmux.conf"
+alias opry="nvim ~/.pryrc"
 alias overview="open 'https://github.com/awortham?tab=overview&from="$(date '+%Y-%m-%d')"'"
-alias ovim="vim ~/.config/nvim/init.vim"
+alias ovim="nvim ~/.config/nvim/init.vim"
 alias oz="vim ~/.zshrc"
 alias rc="rails c"
 alias rez="source ~/.zshrc && echo 'Your zshrc has been reloaded'"
@@ -212,13 +212,6 @@ export FZF_DEFAULT_OPTS='
   -i
   --color=info:#303030
 '
-# This was an attempt to make fzf use the silver searcher so that it used the gitignore. However, in my vim setup,
-# I don't know how to make it use the standard fzf command. I either have :Files or :Gfiles.
-# export FZF_DEFAULT_COMMAND='ag --nogroup --nocolor --column'
-export FZF_DEFAULT_COMMAND='ag -g ""'
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export BAT_THEME="Tomorrow-Night"
-
 export PATH="/usr/local/sbin:$PATH"
 
 # Setting PATH for Python 3.7
@@ -229,21 +222,21 @@ export PATH
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
 
-# app specific aliases
-alias nvim-lazy="NVIM_APPNAME=LazyVim nvim"
-alias nvim-scratch="NVIM_APPNAME=ScratchVim nvim"
+# # app specific aliases
+# alias nvim-lazy="NVIM_APPNAME=LazyVim nvim"
+# alias nvim-scratch="NVIM_APPNAME=ScratchVim nvim"
 
-function nvims() {
-  items=("default" "LazyVim" "ScratchVim")
-  config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=50% --layout=reverse --border --exit-0)
-  if [[ -z $config ]]; then
-    echo "Nothing selected"
-    return 0
-  elif [[ $config == "default" ]]; then
-    config=""
-  fi
-  NVIM_APPNAME=$config nvim $@
-}
+# function nvims() {
+#   items=("default" "LazyVim" "ScratchVim")
+#   config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=50% --layout=reverse --border --exit-0)
+#   if [[ -z $config ]]; then
+#     echo "Nothing selected"
+#     return 0
+#   elif [[ $config == "default" ]]; then
+#     config=""
+#   fi
+#   NVIM_APPNAME=$config nvim $@
+# }
 
 # bindkey -s ^a "nvims\n"
 
