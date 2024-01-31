@@ -33,6 +33,7 @@
   opt.swapfile = false
   opt.synmaxcol = 400
   opt.tabstop = 2
+  opt.termguicolors = true
   opt.ttyfast = true
   opt.visualbell = true
   opt.wildignore = { "*.o", "*.ob", "*vim/backups", "*~", "*sass-cache", "*DS_Store", "vendor/rails/**", "vendor/cache/**", "*.gem", "log/**", "tmp/**", "*.png", "*.jpg", "*.gif", "*/tmp/", "*/bin/", "*.so", "*.swp", "*.zip" }
