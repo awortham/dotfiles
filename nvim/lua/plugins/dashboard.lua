@@ -26,7 +26,7 @@ return {
         center = {
           { action = "ene | startinsert",                                        desc = " New file",        icon = " ", key = "n" },
           { action = "Telescope oldfiles",                                       desc = " Recent files",    icon = " ", key = "r" },
-          { action = [[lua require('telescope.builtin').find_files({cwd="~/.config/ScratchVim"})]], desc = " Config",          icon = " ", key = "c" },
+          { action = [[lua require('telescope.builtin').find_files({cwd="~/.config/nvim"})]], desc = " Config",          icon = " ", key = "c" },
           { action = 'lua require("persistence").load()',                        desc = " Restore Session", icon = " ", key = "s" },
           { action = "Mason",                                                    desc = " Mason",           icon = " ", key = "m" },
           { action = "Lazy",                                                     desc = " Lazy",            icon = "󰒲 ", key = "l" },
