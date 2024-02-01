@@ -31,5 +31,6 @@
   "vim-surround": { "branch": "master", "commit": "3d188ed2113431cf8dac77be61b842acb64433d9" },
   "vim-test": { "branch": "master", "commit": "46d2067586b788e2194e812bbfdbb2061b93a5ee" },
   "vim-unimpaired": { "branch": "master", "commit": "6d44a6dc2ec34607c41ec78acf81657248580bf1" },
-  "vim-windowswap": { "branch": "master", "commit": "15db3f697aa1fa696d99fcdc920c90cd2cec855e" }
+  "vim-windowswap": { "branch": "master", "commit": "15db3f697aa1fa696d99fcdc920c90cd2cec855e" },
+  "which-key.nvim": { "branch": "main", "commit": "4433e5ec9a507e5097571ed55c02ea9658fb268a" }
 }
