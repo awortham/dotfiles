@@ -1,9 +1,10 @@
 return {
   {
-    "nvim-telescope/telescope.nvim", tag = "0.1.5",
+    "nvim-telescope/telescope.nvim",
+    tag = "0.1.5",
     dependencies = {
       "nvim-lua/plenary.nvim",
-      "cwebster2/github-coauthors.nvim"
+      "cwebster2/github-coauthors.nvim",
     },
 
     config = function()
@@ -19,30 +20,27 @@ return {
       end, {})
 
       vim.keymap.set("n", "<leader>co", function()
-        require('telescope.builtin').find_files({cwd="~/.config/ScratchVim"})
+        require("telescope.builtin").find_files({ cwd = "~/.config/ScratchVim" })
       end, {})
 
       require("telescope").setup({
         defaults = {
           mappings = {
             i = {
-              ["<C-k>"] = actions.move_selection_previous,                -- move to previous result
-              ["<C-j>"] = actions.move_selection_next,                    -- move to next result
-              ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist, 
+              ["<C-k>"] = actions.move_selection_previous, -- move to previous result
+              ["<C-j>"] = actions.move_selection_next, -- move to next result
+              ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
             },
           },
 
           file_ignore_patterns = {
             "node_modules",
-            ".git",
+            "%.git",
             "vendor",
-            ".lock",
+            "%.lock",
             "tmp",
-            "import_data_samples",
-            "legacy_invoices",
-            "tasting_notes",
-            ".csv",
-            "public/assets"
+            "%.csv",
+            "public/assets",
           },
         },
       })
@@ -54,11 +52,11 @@ return {
       require("telescope").setup({
         extensions = {
           ["ui-select"] = {
-            require("telescope.themes").get_dropdown {}
-          }
-        }
+            require("telescope.themes").get_dropdown({}),
+          },
+        },
       })
       require("telescope").load_extension("ui-select")
-    end
-  }
+    end,
+  },
 }
