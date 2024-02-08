@@ -225,18 +225,19 @@ export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
 # # app specific aliases
 # alias nvim-lazy="NVIM_APPNAME=LazyVim nvim"
 # alias nvim-scratch="NVIM_APPNAME=ScratchVim nvim"
+alias nvim-bug="NVIM_APPNAME=bug nvim"
 
-# function nvims() {
-#   items=("default" "LazyVim" "ScratchVim")
-#   config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=50% --layout=reverse --border --exit-0)
-#   if [[ -z $config ]]; then
-#     echo "Nothing selected"
-#     return 0
-#   elif [[ $config == "default" ]]; then
-#     config=""
-#   fi
-#   NVIM_APPNAME=$config nvim $@
-# }
+function nvims() {
+  items=("default" "bug")
+  config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=50% --layout=reverse --border --exit-0)
+  if [[ -z $config ]]; then
+    echo "Nothing selected"
+    return 0
+  elif [[ $config == "default" ]]; then
+    config=""
+  fi
+  NVIM_APPNAME=$config nvim $@
+}
 
 # bindkey -s ^a "nvims\n"
 
