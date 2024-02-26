@@ -1,3 +1,4 @@
 return {
-  "machakann/vim-highlightedyank"
+  "machakann/vim-highlightedyank",
+  event = "VeryLazy",
 }

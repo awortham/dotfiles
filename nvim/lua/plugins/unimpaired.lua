@@ -1,3 +1,6 @@
 return {
-  { "tpope/vim-unimpaired" },
+	{
+		"tpope/vim-unimpaired",
+		event = "VeryLazy",
+	},
 }

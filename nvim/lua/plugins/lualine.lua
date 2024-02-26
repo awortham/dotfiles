@@ -1,8 +1,9 @@
 return {
-  "nvim-lualine/lualine.nvim",
-  dependencies = { "nvim-tree/nvim-web-devicons" },
+	"nvim-lualine/lualine.nvim",
+	event = "VeryLazy",
+	dependencies = { "nvim-tree/nvim-web-devicons" },
 
-  opts = {
-    options = { theme = "dracula" }
-  }
+	opts = {
+		options = { theme = "dracula" },
+	},
 }

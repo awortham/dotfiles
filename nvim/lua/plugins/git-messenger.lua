@@ -1,4 +1,4 @@
 return {
   "rhysd/git-messenger.vim",
-  lazy = false,
+  event = "VeryLazy",
 }
