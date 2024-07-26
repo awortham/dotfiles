@@ -11,7 +11,7 @@ return {
     event = "VeryLazy",
     config = function()
       require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls", "ruby_ls" },
+        ensure_installed = { "lua_ls", "ruby_lsp" },
       })
     end,
   },
@@ -24,7 +24,7 @@ return {
       lspconfig.lua_ls.setup({})
       lspconfig.tsserver.setup({})
       lspconfig.standardrb.setup({})
-      lspconfig.ruby_ls.setup({})
+      lspconfig.ruby_lsp.setup({})
       lspconfig.stimulus_ls.setup({}) -- not sure how to use this yet 😅
       lspconfig.eslint.setup({
         on_attach = function(_, bufnr)

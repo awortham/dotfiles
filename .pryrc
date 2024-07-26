@@ -14,7 +14,9 @@ if defined?(PryByebug)
 end
 
 def dfc
-  Detaso::Database.first.connect!
+  if defined?(Detaso)
+    Detaso::Database.first.connect!
+  end
 end
 
 if defined?(Detaso)
@@ -31,5 +33,19 @@ end
 if defined?(Kairos)
   if Rails.env.development?
     org! Organization.first
+  end
+end
+
+if defined?(Pry)
+  begin
+    require "rb-readline"
+    require "readline"
+  rescue LoadError
+  end
+
+  if defined?(RbReadline)
+    def RbReadline.rl_reverse_search_history(sign, key)
+      rl_insert_text `cat ~/.local/share/pry/pry_history | awk '!seen[$0]++' | fzf --tac | tr '\n' ' '`
+    end
   end
 end

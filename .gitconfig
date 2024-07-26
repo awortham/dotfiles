@@ -43,7 +43,7 @@
 	instructionFormat = (%an <%ae>) %s
 [merge]
   no-edit = true
-  conflictstyle = zdiff3
+  ; conflictstyle = zdiff3
 [pull]
 	default = current
 	rebase = false

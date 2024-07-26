@@ -30,7 +30,7 @@ alias fixdb="rake db:drop db:create db:migrate db:seed"
 alias fore="foreman start -f Procfile.dev"
 
 #git aliases
-alias gdbranches="git branch | grep -v 'main' | grep -v 'staging' | xargs git branch -D "
+alias gdbranches="git branch | grep -v 'main' | grep -v 'qa' | xargs git branch -D "
 alias gdothers="git branch | grep -v 'main' | grep -v 'staging' | grep -v 'aw-' | xargs git branch -D "
 alias git-delete-merged-branches='git checkout -q main && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base main $branch) && [[ $(git cherry main $(git commit-tree $(git rev-parse $branch^{tree}) -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; git remote prune origin; git fetch -p; done'
 alias gPo="git push origin "
@@ -266,4 +266,4 @@ export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 export PATH="/usr/local/opt/libpq/bin:$PATH"
 
 eval "$(ssh-add --apple-load-keychain)"
-unalias mysql
+# unalias mysql
