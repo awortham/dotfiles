@@ -268,3 +268,8 @@ export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 # export PATH="/usr/local/opt/libpq/bin:$PATH"
 
 eval "$(ssh-add --apple-load-keychain)"
+
+if [ -r ~/.zshrc ]; then echo -e '\nexport GPG_TTY=$(tty)' >> ~/.zshrc; \
+  else echo -e '\nexport GPG_TTY=$(tty)' >> ~/.zprofile; fi
+
+export GPG_TTY=$(tty)
