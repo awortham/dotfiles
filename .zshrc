@@ -5,6 +5,8 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
@@ -39,7 +41,7 @@ alias gca="git commit -am "
 alias gpo="git pull origin "
 
 alias hosts="sudo vim /etc/hosts"
-alias installmysql="gem install mysql2 -v '0.5.5' -- --with-opt-dir=$(brew --prefix openssl) --with-ldflags=-L/opt/homebrew/opt/zstd/lib"
+alias installmysql="gem install mysql2 -v '0.5.6' -- --with-opt-dir=$(brew --prefix openssl) --with-ldflags=-L/opt/homebrew/opt/zstd/lib"
 alias list_psql="ps -ef | grep postgres"
 alias list="ps -ef"
 alias krs="kill -9 $(lsof -i tcp:3000 -t)"
@@ -211,12 +213,14 @@ export MYSQL_PORT_3306_TCP_ADDR=127.0.0.1
 export MYSQL_SLAVE_PORT_3306_TCP_ADDR=127.0.0.1
 export MYSQL_SLAVE_PORT_3306_TCP_PORT=3307
 
+export HOMEBREW_BUNDLE_FILE=~/dotfiles/Brewfile
+
 # [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 export FZF_DEFAULT_OPTS='
   -i
   --color=info:#303030
 '
-export PATH="/usr/local/sbin:$PATH"
+# export PATH="/usr/local/sbin:$PATH"
 
 # Setting PATH for Python 3.7
 # The original version is saved in .bash_profile.pysave
@@ -224,7 +228,8 @@ PATH="/Library/Frameworks/Python.framework/Versions/3.7/bin:${PATH}"
 export PATH
 # Add Visual Studio Code (code)
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
-export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
+export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@3.3)"
+# export RUBY_CONFIGURE_OPTS="--with-openssl-dir=/Users/aaronwortham/homebrew/Cellar/openssl@3/3.3.1/"
 
 # # app specific aliases
 # alias nvim-lazy="NVIM_APPNAME=LazyVim nvim"
@@ -257,13 +262,9 @@ function lastimg() {
   open tmp/capybara/screenshots/$1/$(ls -t tmp/capybara/screenshots/$1 | head -n 1)
 }
 
-export DIRENV_LOG_FORMAT=
-eval "$(direnv hook zsh)"
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib=$HOME/perl5)"
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
-export PATH="/usr/local/opt/libpq/bin:$PATH"
+# export PATH="/usr/local/opt/libpq/bin:$PATH"
 
 eval "$(ssh-add --apple-load-keychain)"
-# unalias mysql
