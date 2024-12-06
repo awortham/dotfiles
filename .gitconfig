@@ -32,6 +32,7 @@
 	uncommit = reset --soft HEAD^
   undo = "!f() { git reset --soft HEAD^ && git reset; }; f"
 	unstage = reset
+  unstage-file = "!f() { git restore --staged $1; }; f"
   take = "!f() { git co -b aw-$1; }; f"
   reorient = "!f() { git push origin +main:$1 && git reset --hard origin/$1 ; }; f"
   reset-file = "!f() { git checkout origin/main $1; }; f"
@@ -55,7 +56,7 @@
 [hub]
 	protocol = ssh
 [commit]
-	gpgsign = true
+	gpgsign = false
 [url "https://github.com/"]
 	insteadOf = git@github.com:
 	insteadOf = ssh://git@github.com/
