@@ -1,4 +1,4 @@
 return {
-	"wesQ3/vim-windowswap",
-	event = "VeryLazy",
+  "wesQ3/vim-windowswap",
+  event = "VeryLazy",
 }

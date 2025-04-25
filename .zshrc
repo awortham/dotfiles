@@ -30,6 +30,7 @@ alias dotfiles="cd ~/dotfiles"
 alias odots="vim ~/dotfiles"
 alias fixdb="rake db:drop db:create db:migrate db:seed"
 alias fore="foreman start -f Procfile.dev"
+alias pumareset="puma-dev -stop && puma-dev -install"
 
 #git aliases
 alias gdbranches="git branch | grep -v 'main' | grep -v 'qa' | xargs git branch -D "
@@ -168,7 +169,7 @@ function rsb() {
 }
 
 ### Added by the Heroku Toolbelt
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+# [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
 ### shell integration for iterm
 # source ~/.iterm2_shell_integration.`basename $SHELL`
@@ -182,9 +183,9 @@ export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
 ### Add yarn modules to the global path
-export PATH="$PATH:$(yarn global bin)"
-export PATH="$PATH:$(npm bin)"
-export PATH="./node_modules/.bin:$PATH"
+# export PATH="$PATH:$(yarn global bin)"
+# export PATH="$PATH:$(npm bin)"
+# export PATH="./node_modules/.bin:$PATH"
 
 name() {
   branch=$(git rev-parse --abbrev-ref HEAD)
@@ -228,7 +229,8 @@ PATH="/Library/Frameworks/Python.framework/Versions/3.7/bin:${PATH}"
 export PATH
 # Add Visual Studio Code (code)
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
-export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@3.3)"
+
+# export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@3.3)"
 # export RUBY_CONFIGURE_OPTS="--with-openssl-dir=/Users/aaronwortham/homebrew/Cellar/openssl@3/3.3.1/"
 
 # # app specific aliases
@@ -252,24 +254,21 @@ function nvims() {
 
 # ulimit -Sn 10240
 
-# Nix
-if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
-  . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
-fi
-# End Nix
-
 function lastimg() {
   open tmp/capybara/screenshots/$1/$(ls -t tmp/capybara/screenshots/$1 | head -n 1)
 }
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-# eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib=$HOME/perl5)"
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
-# export PATH="/usr/local/opt/libpq/bin:$PATH"
 
 eval "$(ssh-add --apple-load-keychain)"
 
-if [ -r ~/.zshrc ]; then echo -e '\nexport GPG_TTY=$(tty)' >> ~/.zshrc; \
-  else echo -e '\nexport GPG_TTY=$(tty)' >> ~/.zprofile; fi
+if command -v flox >/dev/null; then
+  if [ -d .flox ]; then
+    eval "$(flox activate)"
+  fi
+fi
 
 export GPG_TTY=$(tty)
+# Hook for desk activation
+[ -n "$DESK_ENV" ] && source "$DESK_ENV" || true

@@ -1,4 +1,4 @@
 return {
-	"slim-template/vim-slim",
-	event = "VeryLazy",
+  "slim-template/vim-slim",
+  event = "VeryLazy",
 }

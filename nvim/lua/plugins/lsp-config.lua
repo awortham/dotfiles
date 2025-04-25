@@ -11,6 +11,7 @@ return {
     event = "VeryLazy",
     config = function()
       require("mason-lspconfig").setup({
+        -- ensure_installed = { "lua_ls", "ruby_lsp", "erb-formatter", "erb-lint" },
         ensure_installed = { "lua_ls", "ruby_lsp" },
       })
     end,
@@ -22,9 +23,10 @@ return {
       local lspconfig = require("lspconfig")
 
       lspconfig.lua_ls.setup({})
-      lspconfig.tsserver.setup({})
+      lspconfig.ts_ls.setup({})
       lspconfig.standardrb.setup({})
-      lspconfig.ruby_lsp.setup({})
+      -- disabling, for now - this was causing my erb templates to throw linting errors all over them. Gross 😅
+      -- lspconfig.ruby_lsp.setup({})
       lspconfig.stimulus_ls.setup({}) -- not sure how to use this yet 😅
       lspconfig.eslint.setup({
         on_attach = function(_, bufnr)
