@@ -121,10 +121,10 @@ bake() {
   fi
 }
 
-function prompt_rbenv {
-  rbv=eval rbenv version | sed -e 's/ .*//'
-  echo $rbv
-}
+# function prompt_rbenv {
+#   rbv=eval rbenv version | sed -e 's/ .*//'
+#   echo $rbv
+# }
 
 ### function to display git branch in standard readout
 # source ~/.git-prompt.sh
@@ -179,8 +179,8 @@ if [ $ITERM_SESSION_ID ]; then
   export PROMPT_COMMAND='echo -ne "\033];${PWD##*/}\007"; ';
 fi
 
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+# export PATH="$HOME/.rbenv/bin:$PATH"
+# eval "$(rbenv init -)"
 
 ### Add yarn modules to the global path
 # export PATH="$PATH:$(yarn global bin)"
@@ -209,7 +209,7 @@ list_colors() {
   done
 }
 
-export RBENV_ROOT=$HOME/.rbenv
+# export RBENV_ROOT=$HOME/.rbenv
 export MYSQL_PORT_3306_TCP_ADDR=127.0.0.1
 export MYSQL_SLAVE_PORT_3306_TCP_ADDR=127.0.0.1
 export MYSQL_SLAVE_PORT_3306_TCP_PORT=3307
@@ -272,3 +272,6 @@ fi
 export GPG_TTY=$(tty)
 # Hook for desk activation
 [ -n "$DESK_ENV" ] && source "$DESK_ENV" || true
+
+export JAVA_HOME=$(/usr/libexec/java_home)
+export PATH=$PATH:$JAVA_HOME/bin
